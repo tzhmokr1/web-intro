@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>ToDo Liste mit MVC</title>
+  <style>
+    li.selected {
+      border: solid red 2px;
+    }
+
+    ol {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    li {
+      display: block;
+      padding: 3px;
+      width: 300px;
+    }
+  </style>
+</head>
+<body>
+<h1>ToDo Liste mit MVC</h1>
+<form>
+<label for="toDoTxt">Neues ToDo:</label>
+<input id="toDoTxt">
+<button id="addBtn" disabled>Hinzufügen</button>
+</form>
+<h2>ToDo Liste</h2>
+<ol id="toDoListElm">
+</ol>
+<button id="remBtn" disabled>Löschen</button>
+
+<script>
+
+  class ToDo {
+    constructor(toDoText) {
+      this.toDoText = toDoText;
+    }
+  }
+
+  // Model / State
+  let toDoList = [];
+  let newToDoTextEmpty = true;
+  let selectedToDoElm = null;
+
+
+  const toDoTxt = document.querySelector('#toDoTxt');
+  const addBtn = document.querySelector('#addBtn');
+  const toDoListElm = document.querySelector('#toDoListElm');
+  const remBtn = document.querySelector('#remBtn');
+
+
+  toDoTxt.addEventListener('input', function() {
+    newToDoTextEmpty = !Boolean(toDoTxt.value);
+    addBtn.disabled = newToDoTextEmpty;
+  });
+
+  function toDoElementHTMLString(toDo, index) {
+    return `<li data-index="${index}">${toDo.toDoText}</li>`;
+  }
+
+  function toDoListContentHTMLString(toDoList) {
+    if (toDoList.length === 0){
+      return '<h3>Deine ToDo Liste ist leer. Erfasse das erste ToDo</h3>';
+    }
+    // lang
+    // let listContentHTMLString = '';
+    // for (let i = 0; i < toDoList.length; i++) {
+    //   listContentHTMLString += toDoElementHTMLString(toDoList[i], i);
+    // }
+    // return listContentHTMLString;
+    return toDoList.map(toDoElementHTMLString).join('');
+  }
+
+  function udateUI() {
+    let selectedIndex = -1;
+    if (selectedToDoElm) {
+      selectedIndex = parseInt(selectedToDoElm.dataset.index);
+    }
+    toDoListElm.innerHTML = toDoListContentHTMLString(toDoList);
+    selectedToDoElm = document.querySelector(`[data-index="${selectedIndex}"`);
+    if (selectedToDoElm) {
+      selectedToDoElm.classList.add('selected')
+    }
+    addBtn.disabled = newToDoTextEmpty;
+    remBtn.disabled = ! Boolean(selectedToDoElm);
+  }
+
+  addBtn.addEventListener('click', function() {
+    //add new toDoItem
+    toDoList.push(new ToDo(toDoTxt.value));
+    toDoTxt.value = '';
+    newToDoTextEmpty = true;
+    udateUI();
+  });
+
+  toDoListElm.addEventListener('click', function(e) {
+    //catches bubbling click event from toDoItems to select / unselect
+    if (e.target.tagName === 'LI') {
+      //user clicked on a toDoItem (= li-Element)
+      if (selectedToDoElm) {
+        selectedToDoElm.classList.remove('selected');
+      }
+      if (e.target === selectedToDoElm) {
+        //unselect
+        selectedToDoElm = null;
+        remBtn.disabled = true;
+      } else {
+        //select
+        e.target.classList.add('selected');
+        selectedToDoElm = e.target;
+        remBtn.disabled = false;
+      }
+    }
+  });
+
+  remBtn.addEventListener('click', function() {
+    //remove selected toDoItem
+    let newToDoList = [];
+    let removeIndex = parseInt(selectedToDoElm.dataset.index);
+    for (let i = 0; i < toDoList.length; i++) {
+      if (i !== removeIndex) {
+        newToDoList.push(toDoList[i]);
+      }
+    }
+    toDoList = newToDoList;
+    // kürzer: toDoList.splice(removeIndex, 1);
+    selectedToDoElm = null;
+    remBtn.disabled = true;
+    udateUI();
+  });
+
+  udateUI();
+
+</script>
+</body>
+</html>

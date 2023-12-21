@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Table th-Element Scope Attribute</title>
+  <style>
+    table,
+    td {
+      border: 1px solid black;
+    }
+
+    [scope="row"] {
+      background-color: chartreuse;
+    }
+
+    [scope="col"] {
+      background-color: lightblue;
+    }
+  </style>
+</head>
+<body>
+<h1>Table th-Element Scope Attribute</h1>
+
+<table>
+  <thead>
+  <tr>
+    <th></th>
+    <th scope="col">col-head1</th>
+    <th scope="col">col-head2</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <th scope="row">row-head1</th>
+    <td>cell 1.1</td>
+    <td>cell 1.2</td>
+  </tr>
+  <tr>
+    <th scope="row">row-head2</th>
+    <td>cell 2.1</td>
+    <td>cell 2.2</td>
+  </tr>
+
+  </tbody>
+</table>
+
+</body>
+</html>

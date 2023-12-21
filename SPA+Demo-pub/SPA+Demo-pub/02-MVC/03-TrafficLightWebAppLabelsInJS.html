@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title id="appTitle1"></title>
+  <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚦</text></svg>">
+  <style>
+    .light {
+      width: 100px;
+      height: 100px;
+      border: solid black 2px;
+      text-align: center;
+    }
+
+    .light h3 {
+      line-height: 100px;
+      margin: 0;
+    }
+
+    #switch {
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+<h1 id="appTitle2"></h1>
+<button id="switch" autofocus></button>
+<div class="light">
+  <h3></h3>
+</div>
+<div class="light">
+  <h3></h3>
+</div>
+<div class="light">
+  <h3></h3>
+</div>
+<script>
+  function initApp() {
+    'use strict';
+
+    // config / constants
+    const LIGHTS_COUNT = 3;
+    const LABELS = {appTitle: 'Traffic Light Web App', switch: 'Switch to Next', lights: ['Stop', 'Attention', 'Go']};
+    const ON_COLORS = ['red', 'orange', 'darkseagreen'];
+    const OFF_COLORS = ['#910000', '#802001', '#005504'];
+
+    // model / app-state
+    let lightState = 0;
+
+    // view references
+    const lightElements = document.querySelectorAll('.light');
+    const switchButton = document.getElementById('switch');
+
+    // view rendering / update
+
+    function initView() {
+      document.getElementById('appTitle1').innerText = LABELS.appTitle;
+      document.getElementById('appTitle2').innerText = LABELS.appTitle;
+      document.getElementById('switch').innerText = LABELS.switch;
+      lightElements.forEach((lightElement, i) =>
+          lightElement.firstElementChild.innerText = LABELS.lights[i]);
+    }
+
+    function updateView() {
+      lightElements.forEach((lightElement, i) =>
+          lightElement.style.backgroundColor = OFF_COLORS[i]);
+      lightElements[lightState].style.backgroundColor = ON_COLORS[lightState];
+    }
+
+    // controller & helper functions
+    function goToNextLightState() {
+      lightState = (lightState + 1) % LIGHTS_COUNT;
+    }
+
+    function switchLights() {
+      goToNextLightState();
+      updateView();
+    }
+
+    //attach eventListeners
+    switchButton.addEventListener('click', switchLights);
+
+    // init view / display initial state
+    initView();
+    updateView();
+  }
+
+  document.addEventListener('DOMContentLoaded', initApp);
+</script>
+</body>
+</html>

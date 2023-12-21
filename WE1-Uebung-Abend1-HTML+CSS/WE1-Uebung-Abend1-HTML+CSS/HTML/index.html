@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <title>HTML Übung</title>
+    <link
+      rel="icon"
+      href="../HSR.Template.Exercises/icon-document.png"
+      type="image/png"
+    />
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="../HSR.Template.Exercises/documentStyle.css"
+    />
+    <script src="../HSR.Template.Exercises/solutions.js"></script>
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+    <style>
+      .solutionBox {
+        width: 100%;
+        height: 5em;
+      }
+      .marked {
+        background: lightgreen;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>
+      <a class="backlink" href="../index.html">⇦</a>
+      HTML Übung
+      <button id="showSolutions">Lösungen anzeigen/ausblenden</button>
+    </h1>
+
+    <h2>Encoding / Umlaute</h2>
+    <p>
+      Sehen Sie sich die folgende Datei an:
+      <a href="./files/aoeuml.html" target="_blank">files/aoeuml.html</a>.
+      Einige Zeichen werden nicht richtig dargestellt. Finden Sie das Problem
+      und beheben Sie es.
+    </p>
+    <div class="solution">
+      <pre
+        class="prettyprint"
+      ><code class="language-html">&lt;meta charset="ascii"&gt;</code></pre>
+      <p>
+        Umlaute sind nicht ASCII kompatibel und werden von UTF8 mit mehr als
+        einem Byte abgespeichert. Durch die Interpretation des UTF8 codierten
+        Dokumentes als ASCII werden längere Zeichen als einzelne interpretiert
+        wodurch ein falsches Zeichen dargestellt wird. Lösung:
+      </p>
+      <pre class="prettyprint"><code class="language-html">&lt;meta charset="utf-8"&gt;</code></pre>
+      <p>
+        Zu beachten: &lt;meta charset="utf-8"&gt; muss im File gesetzt werden. 
+        Das Encoding ist beim Einlesen vom File relevant.
+        Eine Änderung im DOM (Browser) bewirkt nichts.
+      </p>
+    </div>
+
+    <h2>Dokument erstellen</h2>
+    <p>
+      Erstellen Sie folgendes HTML Dokument mit dem Titel "Tesla Model S".
+      Hinweis: Heading-Hierarchien werden mit <code>&lt;h1&gt;</code>-<code
+        >&lt;h6&gt;</code
+      >
+      erzeugt.
+    </p>
+    <pre>
+Tesla Model S
+=============
+
+The Tesla Model S is a full-sized all-electric five-door, luxury liftback, produced by Tesla Motors,
+and introduced in June 2012.[10] It scored a perfect 5.0 NHTSA automobile safety rating.
+The United States Environmental Protection Agency (EPA) official range for the 2012 Model S Performance model equipped with an 85 kWh battery pack is 265 miles (426 km),
+higher than any other electric car at the time.[11][12][13]
+EPA rates its energy consumption at 237.5 Wh per kilometer (38 kWh/100 mi) for a combined fuel economy of 89 miles per gallon gasoline equivalent (2.64 L/100 km or 107 mpg-imp).[11][14]
+
+The Model S became the first electric car to top the monthly new car sales ranking in any country,
+twice leading in Norway, in September and again in December 2013;[15][16][17][18] and also in Demmark in December 2015.[19]
+Global Model S sales passed the 100,000 unit milestone in December 2015.[20]
+
+History
+-------
+The Model S was styled by Franz von Holzhausen, who previously worked for Mazda North American Operations.[26]
+The car was codenamed WhiteStar during research and preliminary development.[1][2][3]
+
+The Model S was announced in a press release on June 30, 2008.[27][28]
+The prototype vehicle was displayed at a press conference on March 26, 2009.[29]
+
+Production
+----------
+Tesla manufactures the Model S at the 5.4 million square foot[39] Tesla Factory in Fremont, California.
+For the European market, Tesla assembles and distributes from its European Distribution Center in Tilburg,
+the Netherlands.[40] Cars are built and tested in Fremont, California. The battery pack,
+the electric motor and parts are disassembled and shipped separately to Tilburg, where the cars are reassembled.[41]
+The center occupies a 203,000 sq ft (18,900 m2) industrial building that also serves as a workshop and spare parts warehouse.
+Tesla expects the Model S to "pay back" the energy that went into producing the car in fewer than 10,000 miles (16,000 km).[42]
+		</pre
+    >
+
+    <figure>
+      <figcaption>
+        Hilfe: Das Zieldokument, dargestellt im Firefox Browser:
+      </figcaption>
+      <img
+        src="./images/articleTeslaTarget.png"
+        style="height: auto; width: 30em; max-width: 100%;"
+      />
+    </figure>
+
+    <div class="solution">
+      <a href="./solution/tesla-s-simple-solution.html" target="_blank"
+        >solution/tesla-s-simple-solution.html</a
+      >
+    </div>
+
+    <h2>HTML korrigieren (1)</h2>
+    In der Vorlesung wurde der folgende HTML-Code diskutiert.
+    <ol>
+      <li>Finden Sie ohne Hilfe die bestehenden Probleme</li>
+      <li>
+        Nutzen Sie den
+        <a href="https://validator.w3.org/nu/#textarea">W3C-Validator</a> um das
+        erste Problem im Code zu finden.
+      </li>
+      <li>
+        Nutzen Sie Webstorm das weitere Problem im HTML-Code zu finden. Tipp:
+        Problem Details mit Code &gt; Inspect Code.
+      </li>
+      <li>
+        Passen Sie den Code so an, dass diese "Clean" ist. Sieher hierzu auch
+        den
+        <a href="https://google.github.io/styleguide/htmlcssguide.html"
+          >Google HTML Styleguide</a
+        >
+      </li>
+    </ol>
+    <pre class="prettyprint"><code class="language-html"><!--
+-->&#x3C;!DOCTYPE html&#x3E;
+&#x3C;html lang=&#x22;en&#x22;&#x3E;
+&#x3C;title&#x3E;Title&#x3C;/title&#x3E;
+&#x3C;input required=&#x22;true&#x22;&#x3E;<!--
+--></code></pre>
+    <div class="solution">
+      Probleme:
+      <ol>
+        <li>
+          Validator: "required" ist ein boolsches Attribut -> ohne Wertzuweisung
+          nutzen
+        </li>
+        <li>
+          Webstorm: Input-Felder sollten durch ein Label-Element beschrieben
+          werden
+        </li>
+        <li>Clean Code: siehe unten</li>
+      </ol>
+      <pre class="prettyprint"><code class="language-html"><!--
+	-->&#x3C;!DOCTYPE html&#x3E;
+&#x3C;html lang=&#x22;en&#x22;&#x3E;
+&#x3C;head&#x3E;
+	&#x3C;title&#x3E;Title&#x3C;/title&#x3E;
+	&#x3C;meta charset=&#x22;UTF-8&#x22;&#x3E;
+&#x3C;/head&#x3E;
+&#x3C;body&#x3E;
+&#x3C;label for=&#x22;ipt1&#x22;&#x3E;Enter the Information&#x3C;/label&#x3E;
+&#x3C;input id=&#x22;ipt1&#x22; required&#x3E;
+&#x3C;/body&#x3E;
+&#x3C;/html&#x3E;<!--
+--></code></pre>
+    </div>
+
+    <h2>HTML korrigieren (2)</h2>
+    <p>
+      Validieren Sie folgendes HTML und finden Sie Fehler und Bad Practices.
+      Versuchen Sie zuerst selbst die Fehler zu finden, bevor sie den
+      W3C-Validator benutzen. Korrigieren Sie die Fehler in der Zeile unterhalb
+      oder beschreiben Sie die Lösung. Sie werden einige HTML-Elemente
+      antreffen, die Sie noch nicht kennen. Lassen Sie sich davon nicht
+      verunsichern. Die Fehler liegen in der HTML- und Attributstruktur selbst
+      und nicht in der Semantik des HTML-Elements.
+    </p>
+    <p>Hinweise: IMG ist ein Void-Element.</p>
+    <pre class="prettyprint"><code class="language-html"><!--
+-->&lt;!-- documenttype: HTML --&gt;
+&lt;html lang=”en”&gt;
+	&lt;header&gt;
+		&lt;meta charset="uft-8" /&gt;
+		&lt;title&gt;Cars&lt;/title&gt;
+	&lt;/header&gt;
+	&lt;body&gt;
+		&lt;div font="Arial" id="theUniqueContainer"&gt;
+			&lt;img src="./car.jpg" alt="car"&gt;&lt;/img&gt;
+			&lt;p id="theUniqueContainer"&gt;
+			&lt;/div&gt;
+		&lt;/p&gt;
+		&lt;form action="./submit" method="POST">
+			&lt;textarea name="comment" size=5&gt;&lt;/textarea&gt;
+		&lt;/form&gt;
+	&lt;body&gt;
+	&lt;foot&gt;
+		&lt;script src="./jquery.js"&gt;
+	&lt;/foot&gt;
+&lt;/html&gt;<!--
+		--></code></pre>
+    <div class="solution">
+      <pre class="prettyprint"><code class="language-html"><!--
+-->&lt;!-- documenttype: HTML --&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+	&lt;!--
+	&lt;header&gt;
+	Nicht verwechseln: "header" ist ein gültiges HTML-Element, das zur Strukturierung von Sections oder Articles benutzt wird. Es darf jedoch nicht ausserhalb des "body"-Elements eingesetzt werden.
+	--&gt;
+	&lt;head&gt;
+		&lt;meta charset="utf-8" /&gt;
+		&lt;title&gt;Cars&lt;/title&gt;
+
+	&lt;!-- &lt;/header&gt; --&gt;
+	&lt;/head&gt;
+	&lt;body&gt;
+		&lt;!--
+		&lt;div font="Arial" id="theUniqueContainer"&gt;
+		font=“Arial“ ist eine Eigenschaft für die visuelle Darstellung und gehört nicht ins HTML
+		--&gt;
+		&lt;div id="theUniqueContainer">
+			&lt;!-- &lt;img src="./car.jpg" alt="car"&gt;&lt;/img&gt; --&gt;
+			&lt;img src="./images/car.svg" alt="car" />
+
+			&lt;!--
+			&lt;p id="theUniqueContainer"&gt;
+			ID (Eindeutiger Identifier) darf nur einmal im Dokument vorkommen
+			--&gt;
+			&lt;p id="theNextContainer"&gt;
+
+			&lt;!-- P wurde nicht geschlossen --&gt;
+			&lt;/p&gt;
+		&lt;/div&gt;
+		&lt;!--
+		&lt;/p&gt;
+		Kein öffnender P-Tag, entfernen
+		--&gt;
+
+		&lt;form action="./submit" method="POST">
+			&lt;!--
+			&lt;textarea name="comment" size=5&gt;&lt;/textarea&gt;
+			Das Attribute size existiert nicht.
+			--&gt;
+			&lt;textarea name="comment" data-size="5"&gt;&lt;/textarea&gt;
+		&lt;/form&gt;
+
+		&lt;!--
+		&lt;foot&gt;
+		Nicht existierendes Element, Script zuunterst in Body einfügen
+		Nicht verwechseln: "footer" ist ein gültiges HTML-Element, das zur Strukturierung von Sections oder Articles benutzt wird. Es darf jedoch nicht ausserhalb des "body"-Elements eingesetzt werden.
+		--&gt;
+		&lt;!-- Element schliessen --&gt;
+		&lt;script src="./jquery.js"&gt;&lt;/script&gt;
+
+	&lt;!--
+	&lt;body&gt;
+	Element muss geschlossen statt erneut geöffnet werden
+	--&gt;
+	&lt;/body&gt;
+&lt;/html&gt;<!--
+			--></code></pre>
+    </div>
+    <h2>Debugging - Fehler erkennen</h2>
+    <p>
+      Das gegebene HTML
+      <a href="./files/debug.html" target="_blank">debug.html</a> stellt die
+      Bestätigungsseite zu einem Formular dar. Leider funktioniert diese Seite
+      nicht wie gewünscht. Nutzen Sie die Development Tools ihres Browser um die
+      Fehler zu finden.
+    </p>
+    <p>
+      <strong>Hinweis</strong>: Öffnen Sie das Element Tab in den Development
+      Tools und analysieren Sie den vom Parser generierten DOM Baum. Vergleichen Sie 
+      den Baum mit dem HTML im File. Die Development Tools lassen sich in den gängigen 
+      Browsern unter Windows mit F12 öffnen. OSX/Mac Chrome: [COMMAND+OPT+I]).
+    </p>
+    <ol style="list-style-type: lower-alpha;">
+      <li>
+        Vergleichen Sie die vom Browser interpretierte Struktur mit der im HTML
+        gegebenen Struktur. Welche Mutation hat der Browser vorgenommen?
+
+        <div class="solution">
+          <p>
+            Der Browser findet den abschliessenden SCRIPT-Tag nicht; sämtliches
+            HTML wird als JavaScript eingelesen.
+          </p>
+          <p>
+            Das Script-Element ist kein Void-Element. Es erlaubt auch keine
+            Tag-Ommission: Es muss sowohl das öffnende, wie das schliessende Tag
+            gesetzt werden. Siehe hierzu
+            <a
+              href="https://developer.mozilla.org/de/docs/Web/HTML/Element/script"
+              >MDN Definition des Script Elements</a
+            >
+            <a
+              href="https://www.w3.org/TR/html51/semantics-scripting.html#the-script-element"
+              >W3C Definition des Script Elements</a
+            >
+          </p>
+        </div>
+      </li>
+      <li>
+        Finden Sie die Fehler und korrigieren Sie diese im HTML-Editor. Der W3C
+        Validator
+        <a
+          href="https://validator.w3.org/#validate_by_upload+with_options"
+          target="_blank"
+          >validator.w3.org/#validate_by_upload+with_options</a
+        >
+        kann auch Korrektur-Tips anzeigen (Advanced &gt; [X] Clean up Markup
+        with HTML-Tidy).
+
+        <div class="solution">
+          <p>
+            Der Browser findet den abschliessenden SCRIPT-Tag nicht; sämtliches
+            HTML wird als JavaScript eingelesen.
+          </p>
+        </div>
+      </li>
+      <li>
+        Lesen Sie im HTML Standard die Eigenschaften des
+        <a
+          href="http://www.w3.org/TR/html5/scripting-1.html#the-script-element"
+          target="_blank"
+          >SCRIPT Elements HTML5
+        </a>
+        (siehe auch tag omission) nach. Warum zeigt der Browser eine derartige
+        Reaktion aufs inkorrekte HTML?
+
+        <div class="solution">
+          <p>
+            Das SCRIPT-Element erfordert in jedem Fall einen vollen
+            abschliessenden Tag. Tag Omission (d.h. der Tag-End wird automatisch
+            gesetzt), wird vom SCRIPT Element nicht unterstützt.
+            <strong>Vorsicht</strong>: Ein /&gt; gilt im HTML nicht als
+            abschliessenden Tag; dazu müsste XHTML, welches aber wiederum den
+            vollen End-Tag als REQUIRED voraussetzt. Es gibt weitere
+            HTML-Elemente (wie beispielsweise IFRAME / OPTION / ...), welche
+            ebenfalls einen vollen abschliessenden Tag erfordern.
+          </p>
+        </div>
+      </li>
+    </ol>
+
+  </body>
+</html>

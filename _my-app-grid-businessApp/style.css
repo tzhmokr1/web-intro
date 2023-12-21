@@ -1,0 +1,54 @@
+html {
+	height: 100%;
+}
+
+body {
+	height: 100%;
+	margin: 0;
+	font-family: sans-serif;
+}
+
+.container {
+	height: 100%;
+	display: grid;
+	grid-template-columns: 120px 1fr;
+	grid-template-rows: auto 1fr auto;
+	grid-template-areas:
+		"app-bar app-bar"
+		"menu content"
+		"footer footer";
+}
+
+.container > div {
+	padding: 1em;
+}
+
+.app-bar {
+	grid-area: app-bar;
+	background: lightcoral;
+	text-align: center;
+	line-height: 3em;
+}
+
+.menu {
+	grid-area: menu;
+	background: lightgreen;
+}
+
+.content {
+	grid-area: content;
+	background: lightblue;
+}
+
+.footer {
+	grid-area: footer;
+	height: 2em;
+	line-height: 100%;
+	background: lightyellow;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+

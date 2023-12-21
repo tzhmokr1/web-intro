@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ES6 Module Demo</title>
+</head>
+<body>
+<h1>ES6 Module Demo</h1>
+
+<div>Try to access counterService.getCounter() <span id="get-counter">NOT ACCESSIBLE</span></div>
+<div>Try to access counterService.EXPORTED_CONSTANT <span id="constant">NOT ACCESSIBLE</span></div>
+<div>Try to access hiddenCounter <span id="hidden-counter">NOT ACCESSIBLE</span></div>
+
+<script type="module">
+  import counterService from './counterServiceES6.js';
+
+  document.getElementById('get-counter').textContent = 'value = ' + counterService.getCounter();
+  document.getElementById('constant').textContent = 'value = ' + counterService.EXPORTED_CONSTANT;
+  try {
+    document.getElementById('hidden-counter').textContent = 'value = ' + hiddenCounter;
+  }catch (e) {
+    console.error(e);
+  }
+</script>
+
+</body>
+</html>

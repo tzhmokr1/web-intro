@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Übung AJAX</title>
+    <style>
+        li {margin-top: 15px}
+        div.solution {
+            display: none;
+        }
+        div.visible {
+            display: block;
+        }
+        div {
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+<h1>Übung AJAX</h1>
+<h2>http</h2>
+<ul>
+    <li>Rufen Sie die <a href="../01-http-rest/01-helloWorld.html">Hello World Seite</a> mittels cUrl auf.
+        Hinweis: Curl ist sowohl auf Mac (Terminal) als auch in akuellen Windows 10 Installationen verfügbar.
+        <div class="solution">Mögliche Lösung: curl -i -v
+            "http://localhost:63342/AJAX-Demo/01-http-rest/01-helloWorld.html?_ijt=9999
+            Achtung Port (63342) und _ijt (9999) müssen abgepasst werden
+        </div>
+        <div><button>Show/Hide Solution</button></div>
+    </li>
+    <li>Starten Sie den Node Hello World Web Server unter 01-http-rest/02-server-hello.js. Zeigen Sie die Root-Seite
+        im Browser und mittels cUrl an.
+        <div class="solution">Mögliche Lösung: In Webstorm 01-http-rest/02-server-hello.js ausführen (mittels run
+            config)
+            oder im Terminal im directory 01-http-rest 'node 02-server-hello.js' ausführen.
+            Dann Browser http://localhost:8080 bzw curl -i -v "http://localhost:8080"
+        </div>
+        <div><button>Show/Hide Solution</button></div>
+    </li>
+
+</ul>
+<h2>REST</h2>
+<ul>
+    <li>Installieren sie JSON-Server (npm)
+        <div class="solution">Mögliche Lösung: Terminal im Root Directory von AJAX-Demo: npm -i json-server
+            (bzw 'npm install' genügt da schon in package.json aufgelistet)
+        </div>
+        <div><button>Show/Hide Solution</button></div>
+    </li>
+    <li>Starten Sie json-server mit der songsDB.json
+        <div class="solution">Mögliche Lösung: Da alles in package.json vorbereitet ist, genügt 'npm start'
+            im Terminal im Root Directory von AJAX-Demo (oder "json-server --watch songsDB.json")
+        </div>
+        <div><button>Show/Hide Solution</button></div>
+    </li>
+    <li>Rufen Sie die Liste aller Songs im Browser und mittels curl ab
+        <div class="solution">Mögliche Lösung: browser http://localhost:3000/songs bzw
+            curl -i -v "http://localhost:3000/songs"
+        </div>
+        <div><button>Show/Hide Solution</button></div>
+    </li>
+    <li>Rufen Sie den Song mit 'id'=02 im Browser und mittels curl ab
+        <div class="solution">Mögliche Lösung: browser http://localhost:3000/songs/02 bzw
+            curl -i -v "http://localhost:3000/songs/02"
+        </div>
+        <div><button>Show/Hide Solution</button></div>
+    </li>
+    <li>Fügen Sie mittels REST Request einen weiteren Song zur Liste der Songs hinzu
+        <div class="solution">Mögliche Lösung (Mac Terminal)<pre>
+            curl --request POST \
+            --url http://localhost:3000/songs/ \
+            --header 'accept: application/json' \
+            --header 'content-type: application/json' \
+            --data '{"title":"My New Song","artist":"TBD","rating":0}'
+            </pre>
+            Mögliche Lösung (Windows 10 Command Prompt)
+            <pre>
+            curl --request POST --url localhost:3000/songs/ --header "accept: application/json" --header "content-type: application/json" --data "{""title"":""My New Song 2"",""artist"":""TBD"",""rating"":0}"
+            </pre>
+        </div>
+        <div><button>Show/Hide Solution</button></div>
+    </li>
+    <li>Überprüfen Sie, dass der neue Song in der Liste angekommen ist
+        <div class="solution">Mögliche Lösung: browser http://localhost:3000/songs bzw
+            curl -i -v "http://localhost:3000/songs" oder in songsDB.json nachschauen
+        </div>
+        <div><button>Show/Hide Solution</button></div>
+    </li>
+    <li>Ändern Sie mittels REST Request das Rating von Song 02 auf 99 (überprüfen Sie den Erfolg)
+        <div class="solution">Mögliche Lösung (Mac Terminal)
+            <pre>
+            curl --request PATCH \
+            --url http://localhost:3000/songs/02 \
+            --header 'accept: application/json' \
+            --header 'content-type: application/json' \
+            --data '{"rating":99}'</pre>
+        </div>
+        <div class="solution">Mögliche Lösung (Windows 10 Terminal)
+            <pre>
+            curl --request PATCH --url http://localhost:3000/songs/02 --header "accept: application/json" --header 'content-type: application/json' --data "{""rating"":99}"
+            </pre>
+        </div>
+        <div><button>Show/Hide Solution</button></div>
+    </li>
+    <li>Löschen Sie mittels REST Request den Song 02 (überprüfen Sie den Erfolg)
+        <div class="solution">Mögliche Lösung
+            <pre>
+            curl --request DELETE --url http://localhost:3000/songs/02
+            </pre>
+        </div>
+        <div><button>Show/Hide Solution</button></div>
+    </li>
+    <li>Beantworten Sie: Welchen Level von REST stellt json-server bereit?
+        Werden 'REST Best Practices' eingehalten?
+        <div class="solution">Antwort: json-server implementiert REST Level 3 (http Verben) direkt "out of the box".
+            REST Best Practices (nouns not verbs, status codes, http methods compliance) werden eingehalten
+            wenn die DB entsprechend aufgebaut ist.
+            Level 4 (HATEOAS) ist möglich aber nicht direkt unterstützt.
+        </div>
+        <div><button>Show/Hide Solution</button></div>
+    </li>
+</ul>
+
+<h2>AJAX</h2>
+
+Gegeben ist die folgende Funktion
+<pre>
+    function asyncDemo(delay, delta) {
+        console.log(`asyncDemo start with delay=${delay}, delta=${delta}`);
+        setTimeout(() => console.log("completed timeout1"), delay + 3  * delta);
+        setTimeout(() => console.log("completed timeout2"), delay + 2  * delta);
+        setTimeout(() => console.log("completed timeout3"), delay + 1  * delta);
+        for (let i = 1; i < 4; i++) {
+            console.log("main thread " + i);
+        }
+        console.log("asyncDemo end")
+    }
+</pre>
+<ul>
+    <li>
+        Was ist der Output beim folgenden Aufruf?
+        <pre>asyncDemo(0, 0);</pre>
+        <div class="solution">Antwort:
+            <pre>
+            asyncDemo start with delay=0, delta=0
+            main thread 1
+            main thread 2
+            main thread 3
+            asyncDemo end
+            completed timeout1
+            completed timeout2
+            completed timeout3
+        </pre>
+        </div>
+        <div><button>Show/Hide Solution</button></div>
+    </li>
+    <li>
+        Was ist der Output beim folgenden Aufruf?
+        <pre>asyncDemo(0, 1);</pre>
+        <div class="solution">Antwort:
+            <pre>
+                asyncDemo start with delay=0, delta=1
+                main thread 1
+                main thread 2
+                main thread 3
+                asyncDemo end
+                completed timeout3
+                completed timeout2
+                completed timeout1
+        </pre>
+        </div>
+        <div><button>Show/Hide Solution</button></div>
+    </li>
+    <li>
+        Was ist der Output beim folgenden Aufruf?
+        <pre>asyncDemo(10, 0);</pre>
+        <div class="solution">Antwort:
+            <pre>
+                asyncDemo start with delay=10, delta=
+                main thread 1
+                main thread 2
+                main thread 3
+                asyncDemo end
+                completed timeout1
+                completed timeout2
+                completed timeout3
+        </pre>
+        </div>
+        <div><button>Show/Hide Solution</button></div>
+    </li>
+    <li>
+        Der CountDown auf der <a href="./files/countDownProblem.html">Webseite  countDownProblem.html</a>
+        funktioniert nicht. Finden Sie heraus was das Problem ist und beheben sie es.
+        <div class="solution">
+            waitAWhile blockert den Mail-Tread. Die DOM Updates werden nicht dargestellt.
+            Es braucht tasks do mit setTimeout gescheduled werden.
+            <a href="files/countDownSolution.html">countDownSolution.html</a>
+        </div>
+        <div><button>Show/Hide Solution</button></div>
+    </li>
+    <li>
+        Asyc DOM Manipulation mit Mock DataService (Callback): Komplettieren Sie den Code in
+        <a href="files/asyncDOMDemo3-asyncCallbackSongs-todo.html">asyncDOMDemo3-asyncCallbackSongs-todo.html</a>
+        <div class="solution">
+            <a href="files/asyncDOMDemo3-asyncCallbackSongs.html">asyncDOMDemo3-asyncCallbackSongs.html</a>
+        </div>
+        <div><button>Show/Hide Solution</button></div>
+    </li>
+    <li>
+        Asyc DOM Manipulation mit Mock DataService (Callback): Komplettieren Sie den Code in
+        <a href="files/asyncDOMDemo3-asyncCallbackSongs-todo.html">asyncDOMDemo3-asyncCallbackSongs-todo.html</a>
+        <div class="solution">
+            <a href="files/asyncDOMDemo3-asyncCallbackSongs.html">asyncDOMDemo3-asyncCallbackSongs.html</a>
+        </div>
+        <div><button>Show/Hide Solution</button></div>
+    </li>
+    <li>
+        Asyc DOM Manipulation mit Mock DataService (Promise.then): Komplettieren Sie den Code in
+        <a href="files/asyncDOMDemo3b-asyncPromiseThenSongs-todo.html">asyncDOMDemo3b-asyncPromiseThenSongs-todo.html</a>
+        <div class="solution">
+            <a href="files/asyncDOMDemo3b-asyncPromiseThenSongs.html">asyncDOMDemo3-asyncCallbackSongs.html</a>
+        </div>
+        <div><button>Show/Hide Solution</button></div>
+    </li>
+    <li>
+        Asyc DOM Manipulation mit Mock DataService (await Promise): Komplettieren Sie den Code in
+        <a href="files/asyncDOMDemo3c-asyncPromiseAwaitSongs-todo.html">asyncDOMDemo3c-asyncPromiseAwaitSongs-todo.html</a>
+        <div class="solution">
+            <a href="files/asyncDOMDemo3c-asyncPromiseAwaitSongs.html">asyncDOMDemo3c-asyncPromiseAwaitSongs.html</a>
+        </div>
+        <div><button>Show/Hide Solution</button></div>
+    </li>
+    <li>
+        Nutzen Sie fetch mit dem Promise.then Syntax (in der Dev-Console des Browsers einer Seite)
+        um die Information zum Song 01 abzufragen
+        <div class="solution">
+        <pre>
+          const SONGS_API_URL = 'http://localhost:3000/songs/';
+          const songId = "01";
+          fetch(SONGS_API_URL + songId)
+            .then((response) => {
+              console.log('response', response)
+              return response.json();
+            })
+            .then((data) => {
+              console.log('thenData', data);
+            });
+        </pre>
+        </div>
+        <div><button>Show/Hide Solution</button></div>
+    </li>
+    <li>
+        Nutzen Sie fetch mit dem await Promise Syntax (in der Dev-Console des Browsers einer Seite)
+        um die Information zum Song 01 abzufragen
+        <div class="solution">
+            In der Console ist "top-level await" erlaubt daher funktioniert
+            <pre>
+                const SONGS_API_URL = 'http://localhost:3000/songs/';
+                const songId = "01";
+                const response = await fetch(SONGS_API_URL + songId);
+                await response.json();
+            </pre>
+            Im Script Code ist "top-level await" nicht möglich.
+            Daher muss hier eine async Funktion definiert werden welche die awaits kapselt.
+            <pre>
+                async function test() {
+                    const response = await fetch(SONGS_API_URL + songId);
+                    const data = await response.json();
+                    console.log('awaitData', data);
+                }
+                test();
+        </pre>
+        </div>
+        <div><button>Show/Hide Solution</button></div>
+    </li>
+    <li>
+        POST Request mit Fetch. Komplettieren Sie
+        <a href="files/03-demoFetchPost.html">03-demoFetchPost-todo.html</a>
+        <div class="solution">
+            <a href="files/03-demoFetchPost-todo.html">03-demoFetchPost.html</a>
+        </div>
+        <div><button>Show/Hide Solution</button></div>
+    </li>
+    <li>
+        Mit fetch Songliste abholen und im DOM mit callback Darstellen:
+        Komplettieren Sie
+        <a href="files/callbackDataService-todo.js">callbackDataService-todo.js</a> so dass
+        <a href="files/01-asyncCallbackSongs-todo.html">01-asyncCallbackSongs-todo.html</a>
+        die Songliste korrekt anzeigen kann.
+        <div class="solution">
+            <a href="files/callbackDataService.js">callbackDataService.js</a>
+            <a href="files/01-asyncCallbackSongs.html">01-asyncCallbackSongs.html</a>
+        </div>
+        <div><button>Show/Hide Solution</button></div>
+    </li>
+    <li>
+        Mit fetch Songliste abholen und im DOM mit Promise.then Darstellen:
+        Komplettieren Sie
+        <a href="files/promiseDataService-todo.js">promiseDataService-todo.js</a> so dass
+        <a href="files/02-asyncPromiseThenSongs-todo.html">02-asyncPromiseThenSongs-todo.html</a> und
+        <a href="files/03-asyncPromiseAwaitSongs-todo.html">03-asyncPromiseAwaitSongs-todo.html</a>
+        die Songliste korrekt anzeigen kann.
+        <div class="solution">
+            <a href="files/promiseDataService.js">promiseDataService.js</a>
+            <a href="files/02-asyncPromiseThenSongs.html">02-asyncPromiseThenSongs.html</a>
+            und
+            <a href="files/03-asyncPromiseAwaitSongs.html">03-asyncPromiseAwaitSongs.html</a>
+        </div>
+        <div><button>Show/Hide Solution</button></div>
+    </li>
+    <li>
+        Mit fetch Songliste abholen und im DOM mit Promise.then Darstellen:
+        Komplettieren Sie
+        <a href="files/promiseDataService-todo.js">promiseDataService-todo.js</a> so dass
+        <a href="files/02-asyncPromiseThenSongs-todo.html">02-asyncPromiseThenSongs-todo.html</a> und
+        <a href="files/03-asyncPromiseAwaitSongs-todo.html">03-asyncPromiseAwaitSongs-todo.html</a>
+        die Songliste korrekt anzeigen kann.
+        <div class="solution">
+            <a href="files/promiseDataService.js">promiseDataService.js</a>
+            <a href="files/02-asyncPromiseThenSongs.html">02-asyncPromiseThenSongs.html</a>
+            und
+            <a href="files/03-asyncPromiseAwaitSongs.html">03-asyncPromiseAwaitSongs.html</a>
+        </div>
+        <div><button>Show/Hide Solution</button></div>
+    </li>
+    <li>
+        Display und Create von Songs mit AJAX. Komplettieren Sie addNewSong in
+        <a href="files/promiseDataService-todo.js">promiseDataService-todo.js</a> und
+        addSongHandler in
+        <a href="files/04-songsAJAX-todo.html">04-songsAJAX-todo.html</a> so dass Anzeigen
+        und Hinzufügen von Songs korrekt funktioniert
+        <div class="solution">
+            <a href="files/promiseDataService.js">promiseDataService.js</a>
+            <a href="files/04-songsAJAX.html">04-songsAJAX.html</a>
+        </div>
+        <div><button>Show/Hide Solution</button></div>
+    </li>
+</ul>
+
+<script>
+    function showHideSolutionHandler (event) {
+      if (event.target.matches('button') ) {
+        const liElement = event.target.closest('li');
+        const solutionDiv = liElement.querySelector('.solution');
+        solutionDiv.classList.toggle('visible');
+      }
+    }
+    document.body.addEventListener('click', showHideSolutionHandler)
+</script>
+
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Position Absolute Demo</title>
+    <style>
+        figure{
+            position: relative;
+            width: 50%;
+        }
+        img{
+            width: 100%;
+        }
+        img + figcaption{
+            position: absolute;
+            right: 10px;
+            bottom: 10px;
+            color: red;
+            font-size: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <figure>
+        <img src="Campus1.jpg" alt="Studierende auf dem HSR Campus">
+        <figcaption>Das ist der HSR Campus. Irgendwann im Sommer</figcaption>
+    </figure>
+</body>
+</html>

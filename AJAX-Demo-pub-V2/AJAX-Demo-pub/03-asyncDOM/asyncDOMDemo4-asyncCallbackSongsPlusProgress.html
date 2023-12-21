@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Async Songs Demo</title>
+    <style>
+        li.song-entry {
+            font-weight: bold;
+            font-size: larger;
+            margin: 5px;
+        }
+
+        span.artist {
+            font-style: italic;
+            white-space: nowrap;
+        }
+    </style>
+</head>
+<body>
+<h1>Async Songs Demo - Callbacks</h1>
+<button>Display Songs</button>
+<ul id="songs-list"></ul>
+
+<script type="module">
+    import dataService from "./mockCallbackDataService.js";
+
+    const loadingProgressIntervalMS = 200;
+
+    const btnElement = document.querySelector('button');
+    const songsList = document.querySelector('#songs-list');
+
+    // view rendering
+    function createSongsHtml(songs) {
+        return songs.map(song =>
+            `<li class="song-entry" id="song-${song.id}">
+                    (${song.rating})
+                        <span class="title">${song.title}</span>
+                        <span class="artist"> (${song.artist})</span>
+            </li>`).join('');
+    }
+
+    function renderSongs(songs) {
+        songsList.innerHTML = createSongsHtml(songs);
+    }
+
+    let loading;
+    let loadingText;
+
+    function showLoadingProgress () {
+        if (loading) {
+            loadingText += ".";
+            songsList.innerHTML = loadingText;
+            setTimeout(showLoadingProgress, loadingProgressIntervalMS);
+        }
+    }
+
+    function startShowLoadingProgress () {
+        loading = true;
+        loadingText = "Loading Songs";
+        showLoadingProgress();
+    }
+    function stopShowLoadingProgress () {
+        loading = false;
+    }
+
+    function getAndRenderSongs() {
+        startShowLoadingProgress();
+        dataService.getSongs((songs) => {stopShowLoadingProgress(); renderSongs(songs)});
+    }
+
+    btnElement.addEventListener('click', getAndRenderSongs);
+
+</script>
+</body>
+</html>

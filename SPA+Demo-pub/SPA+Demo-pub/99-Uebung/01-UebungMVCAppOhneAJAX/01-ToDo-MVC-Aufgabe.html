@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>ToDo Liste mit MVC</title>
+  <style>
+    li.selected {
+      border: solid red 2px;
+    }
+
+    ol {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    li {
+      display: block;
+      padding: 3px;
+      width: 300px;
+    }
+  </style>
+</head>
+<body>
+<h2>Aufgabe To Do Liste</h2>
+<ul>
+  <li>Siehe TODO Items</li>
+  <li>In angegebener Reihenfolge (1, 2, 3, 4) testen</li>
+
+</ul>
+<h1>ToDo Liste mit MVC</h1>
+<label for="toDoTxt">Neues ToDo:</label>
+<input id="toDoTxt">
+<button id="addBtn" disabled>Hinzufügen</button>
+<h2>ToDo Liste</h2>
+<ol id="toDoListElm">
+</ol>
+<button id="remBtn" disabled>Löschen</button>
+
+<script>
+
+  class ToDo {
+    // TODO: Konstruktor der toDoText entgegennimmt und setzt
+  }
+
+  // Model / State
+  let toDoList = [];
+  let newToDoTextEmpty = true;
+  let selectedToDoElm = null;
+
+
+  const toDoTxt = document.querySelector('#toDoTxt');
+  const addBtn = document.querySelector('#addBtn');
+  const toDoListElm = document.querySelector('#toDoListElm');
+  const remBtn = document.querySelector('#remBtn');
+
+
+  toDoTxt.addEventListener('input', function() {
+    // TODO 4: wenn toDoTxt lehr ist addBtn disablen
+  });
+
+  function toDoElementHTMLString(toDo, index) {
+    // TODO 2.1: Im HTML String sollte im <li> element neben dem Text des toDo (im Content)
+    // auch noch im data-index attribut der index des To-Do Objekts in der Liste gespeichert werden
+    // So kann das entsprechende To-Do zu einem ELement wiedergefunden werden.
+
+  }
+
+  function toDoListContentHTMLString(toDoList) {
+    // TODO 2.2: Loop über alle Elemente der Liste. HTML Strings aller ToDos sammeln und zusammen zurückgeben
+    // Optional: wenn die Liste lehr ist einen speziellen String zurückgeben
+  }
+
+  function udateUI() {
+    // TODO 2.3.1: (Optional) Index eines allfällig selektierten ToDos (aus selectedToDoElm) in Variable speichern
+    // TODO 2.3.2: Gesamten Inhalt von toDoListElm ersetzen mit dem Output von toDoListContentHTMLString
+    // TODO 2.3.3: (Optional zusammen mit 2.3.1) mittels querySelector ToDoElement mit index finden,
+    // TODO        dann in selectedToDoElm ablegen und class 'selected setzen
+    // TODO disabled-Status von addBtn und  remBtn korrekt setzen
+  }
+
+  addBtn.addEventListener('click', function() {
+    // TODO 2.4: neues ToDO erstellen (new ToDo) toDoTxt und newToDoTextEmpty setzen, UI-Update anfordern
+  });
+
+  toDoListElm.addEventListener('click', function(e) {
+    // unverändert//
+    if (e.target.tagName === 'LI') {
+      if (selectedToDoElm) {
+        selectedToDoElm.classList.remove('selected');
+      }
+      if (e.target === selectedToDoElm) {
+        selectedToDoElm = null;
+        remBtn.disabled = true;
+      } else {
+        e.target.classList.add('selected');
+        selectedToDoElm = e.target;
+        remBtn.disabled = false;
+      }
+    }
+  });
+
+  remBtn.addEventListener('click', function() {
+    // TODO 3: über selectedToDoElm.dataset.index den Index des aktuell selektierten Elements bestimmen
+    // Dann eine neue toDoListe erstellen: In einem Loop alle Elemente ausser das mit dem bestimmten index
+    // in die neue Liste aufnehmen
+    // Am Ende toDoList mit der neuen Liste ersetzen und selectedToDoElm und remBtn.disabled aktualisieren
+    // und update des UIs anfordern.
+  });
+
+  udateUI();
+  // TODO 1: Warum ist die nötig
+
+</script>
+</body>
+</html>

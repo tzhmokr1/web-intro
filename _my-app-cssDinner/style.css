@@ -1,0 +1,19 @@
+
+div {
+	display: inline-block;
+	box-sizing: border-box;
+	box-shadow: 10px 5px 5px gray;
+	background-color: lightgreen;
+	width: 110px;
+	height: 110px;
+	border: 5px solid green;
+	padding: 25px;
+	margin: 20px;
+}
+
+
+
+
+
+
+

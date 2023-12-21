@@ -1,0 +1,39 @@
+html {
+	height: 100%;
+}
+
+body {
+	height: 100%;
+	margin: 0;
+	font-family: sans-serif;
+}
+
+.container {
+	height: 100%;
+	display: grid;
+	grid-template-columns: 20% 20% 20% 20% 20%;
+	grid-template-rows: 20% 20% 20% 20% 20%;
+	background-color: antiquewhite;
+	grid-template-areas:
+	'eins zwei'
+	'drei vier'
+	'fuenf sechs';
+}
+
+.app-bar {
+	/*grid-column: 2/2;
+	grid-row: 1/2;*/
+	grid-area: 1/1/2/3;
+	background: lightcoral;
+	text-align: center;
+	/*align-self: center;*/
+	/*justify-self: end;*/
+
+}
+
+.menu {
+	grid-area: sechs;
+	background: lightgreen;
+}
+
+

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Combinator General Sibling Combinator Demo</title>
+  <style>
+    article h1 {
+      font-size: initial;
+    }
+    .recent h1 {
+      background: bisque;
+      font-size: 40px;
+      font-variant-caps: small-caps;
+    }
+
+    .recent h1::before {
+      content: "Breaking News: ";
+    }
+
+    .recent ~ .recent h1 {
+      background: initial;
+      font-size: initial;
+      font-variant-caps: initial;
+    }
+
+    .recent ~ .recent h1::before {
+      content: initial;
+    }
+  </style>
+</head>
+<body>
+<article class="recent">
+  <header>
+    <h1>Baby Panda Born</h1>
+  </header>
+  <p>
+    Panda brothers Pit and Paule took their first steps outside Wednesday
+    with their mother Meng Meng at Zoo Berlin. The twins -- the first pandas ever to be born
+    in Germany -- are on view to the public for the first time on Thursday.
+  </p>
+  <footer>Disclaimer: ...</footer>
+</article>
+<article class="recent">
+  <header>
+    <h1>Global Warming: Four Degree Warming Out Of Reach </h1>
+  </header>
+  <p>
+    Climate models predict we’re currently on track for a heating of somewhere
+    between 3C and 4C for 2100, although bear in mind that these are global average
+    temperatures – at the poles and over land (where people live), the increase may
+    be double that. Predictions are tricky, however, as temperatures depend on how
+    sensitive the climate is to carbon dioxide (CO2).
+  </p>
+  <footer>Disclaimer: ...</footer>
+</article>
+
+<article>
+  <header>
+    <h1>Man bites Dog </h1>
+  </header>
+  <p>
+    David Etzel, 37, faces a year or more in jail after jurors found him guilty of animal cruelty Tuesday.
+
+    His crime was one usually not heard of outside intro to journalism classes: He bit a dog.
+
+    All of this happened in — where else? — Florida.
+
+    According to the Palm Beach Post, 6-foot-8, 375-pound Etzel was convicted Tuesday of biting and squeezing his mother’s tiny Shih Tzu so hard that one of the dog’s eyes popped out.
+  </p>
+  <footer>Disclaimer: ...</footer>
+</article>
+
+<article class="recent">
+  <header>
+    <h1>This Year 1.35 Million People will Die in Road Traffic Crashes </h1>
+  </header>
+  <p>
+    Every year the lives of approximately 1.35 million people are cut short as a result
+    of a road traffic crash. Between 20 and 50 million more people suffer
+    non-fatal injuries, with many incurring a disability as a result of their injury.
+
+    Road traffic injuries cause considerable economic losses to individuals, their families,
+    and to nations as a whole. These losses arise from the cost of
+    treatment as well as lost productivity for those killed or disabled by their injuries,
+    and for family members who need to take time off work or school to
+    care for the injured. Road traffic crashes cost most countries 3% of their
+    gross domestic product.
+  </p>
+  <footer>Disclaimer: ...</footer>
+</article>
+
+
+</body>
+</html>

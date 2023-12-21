@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>LoadSongs with Progress (Suspense) - State-Oriented</title>
+    <style>
+        li.song-entry {
+            font-weight: bold;
+            font-size: larger;
+            margin: 5px;
+        }
+
+        span.artist {
+            font-style: italic;
+            white-space: nowrap;
+        }
+    </style>
+</head>
+<body>
+<h1>LoadSongs with Progress (Suspense) - State-Oriented</h1>
+<button>Display Songs</button>
+<ul id="songs-list"></ul>
+
+<script type="module">
+    import dataService from "./mockPromiseDataService.js";
+
+    const LOADING_DISPLAY_INTERVAL = 200;
+    const LOADING_TEXT = "Loading Songs"
+
+    // view refs
+    const btnElement = document.querySelector('button');
+    const songsList = document.querySelector('#songs-list');
+
+    // view model
+    let songs;
+    let loadingProgress;
+
+
+    // view rendering
+    function createSongsHtml(songs) {
+        return songs.map(song =>
+            `<li class="song-entry" id="song-${song.id}">
+                    (${song.rating})
+                        <span class="title">${song.title}</span>
+                        <span class="artist"> (${song.artist})</span>
+            </li>`).join('');
+    }
+
+    function renderSongs(songs) {
+        songsList.innerHTML = createSongsHtml(songs);
+    }
+
+    function progressAndRenderLoadingProgress () {
+        loadingProgress += ".";
+        songsList.innerHTML = LOADING_TEXT + loadingProgress;
+    }
+
+    function renderView () {
+        if (songs) {
+            // not dealt with: double render
+            renderSongs(songs);
+        }else{
+            progressAndRenderLoadingProgress();
+            setTimeout(renderView, LOADING_DISPLAY_INTERVAL);
+        }
+    }
+
+    // controller
+    function startSuspense () {
+        loadingProgress = "";
+        renderView();
+    }
+
+    async function getAndRenderSongs() {
+        songs = undefined;
+        startSuspense();
+        songs = await dataService.getSongs();
+        renderView();
+    }
+
+    btnElement.addEventListener('click', getAndRenderSongs);
+
+</script>
+</body>
+</html>

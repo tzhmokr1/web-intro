@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Guess the Number</title>
+  <script>
+    function initApp() {
+      const introDiv = document.getElementById('introDiv');
+      const guessingDiv = document.getElementById('guessingDiv');
+      const evalGuessDiv = document.getElementById('evalGuessDiv');
+      const endDiv = document.getElementById('endDiv');
+
+      const startBtn = document.getElementById('startBtn');
+      const roundOut = document.getElementById('roundOut');
+      const guessInput = document.getElementById('guessInput');
+      const checkBtn = document.getElementById('checkBtn');
+      const guessOut = document.getElementById('guessOut');
+      const guessEvalOut = document.getElementById('guessEvalOut');
+      const guessAgainBtn = document.getElementById('guessAgainBtn');
+      const resultRoundsOut = document.getElementById('resultRoundsOut');
+      const guessedNumberOut = document.getElementById('guessedNumberOut');
+      const reStartBtn = document.getElementById('reStartBtn');
+
+
+
+      let hiddenNumber;
+      let roundNumber;
+      let guess;
+
+      function startGame() {
+        roundNumber = 1;
+        roundOut.value = roundNumber;
+        hiddenNumber = Math.floor(Math.random()*100)+1;
+        console.log(hiddenNumber);
+        introDiv.hidden = true;
+        endDiv.hidden = true;
+        guessingDiv.hidden = false;
+      }
+
+      startBtn.addEventListener('click', startGame);
+      reStartBtn.addEventListener('click', startGame);
+
+      function evalGuess() {
+        guess = parseInt(guessInput.value);
+        guessOut.value = guess;
+        if (guess === hiddenNumber) {
+          finish();
+        }else{
+          if (guess > hiddenNumber) {
+            guessEvalOut.value = "You guessed too high";
+          }else{
+            guessEvalOut.value = "You guessed too low";
+          }
+          guessingDiv.hidden = true;
+          evalGuessDiv.hidden = false;
+        }
+      }
+
+      checkBtn.addEventListener('click', evalGuess);
+
+      function nextGuess() {
+        roundNumber++;
+        roundOut.value = roundNumber;
+        evalGuessDiv.hidden = true;
+        guessingDiv.hidden = false;
+
+      }
+      guessAgainBtn.addEventListener('click', nextGuess);
+
+
+      function finish() {
+        resultRoundsOut.value = roundNumber;
+        guessedNumberOut.value = hiddenNumber;
+        guessingDiv.hidden = true;
+        evalGuessDiv.hidden = true;
+        endDiv.hidden = false;
+      }
+    }
+
+
+    window.addEventListener('load', initApp);
+  </script>
+</head>
+<body>
+<h1>Guess the Number</h1>
+<div id="introDiv">
+  <h2>How about Guessing a number bewtween 1 and 100? Do You Want to Play a Game? </h2>
+  <button id="startBtn">Start Game</button>
+</div>
+<div id="guessingDiv" hidden>
+  <p>This is round number
+    <output id="roundOut"></output>
+  </p>
+  <label for="guessInput">What is Your Guess?</label>
+  <input id="guessInput">
+  <button id="checkBtn">Check Guess</button>
+</div>
+<div id="evalGuessDiv" hidden>
+  <p>You Guessed
+    <output id="guessOut"></output>
+  </p>
+  <output id="guessEvalOut"></output>
+  <button id="guessAgainBtn">Want to Guess Again?</button>
+</div>
+<div id="endDiv" hidden>
+  <p>Great, you took
+    <output id="resultRoundsOut"></output>
+     Rounds to Guess the Hidden Number
+    <output id="guessedNumberOut"></output>
+  </p>
+  <p>Do You Want to Play Again?</p>
+  <button id="reStartBtn">Start Another Game</button>
+</div>
+</body>
+</html>

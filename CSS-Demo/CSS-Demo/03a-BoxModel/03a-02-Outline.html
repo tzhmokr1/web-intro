@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>BoxModel Border vs Outline</title>
+  <style>
+    .container {
+      width: 140px
+    }
+    .box {
+      display: inline-block;
+      box-sizing: content-box;
+      background: gray;
+      width: 70px;
+      height: 70px;
+    }
+    .bordered {
+      border: red 2px solid;
+    }
+    .outlined {
+      outline: 2px solid chartreuse;
+    }
+  </style>
+</head>
+<body>
+<h1>Border vs Outline</h1>
+<div class="container">
+  <div class="box bordered"></div><div class="box bordered"></div>
+</div>
+<div class="container">
+  <div class="box outlined"></div>
+  <div class="box outlined"></div>
+</div>
+<div class="container">
+  <div class="box outlined"></div><div class="box outlined"></div>
+</div>
+
+
+</body>
+</html>

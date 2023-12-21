@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Demo Fetch</title>
+</head>
+<body>
+<h1>Demo Fetch</h1>
+<script>
+  const SONGS_API_URL = 'http://localhost:3000/songs/';
+  const songId = "02";
+
+  fetch(SONGS_API_URL + songId)
+    .then((response) => {
+      if (response.ok) {
+        return response.json();
+      } else {
+        return Promise.reject();
+      }
+    })
+    .then((data) => {
+      console.log('thenData', data);
+    }).catch((error) =>
+    console.log('thenError'))
+
+  async function test() {
+    try {
+      const response = await fetch(SONGS_API_URL + songId);
+      if (!response.ok) {
+        throw "awaitError not ok";
+      }
+      const data = await response.json();
+      console.log('awaitData', data);
+    } catch {
+      console.log('awaitError');
+    }
+  }
+
+  test();
+</script>
+</body>
+</html>

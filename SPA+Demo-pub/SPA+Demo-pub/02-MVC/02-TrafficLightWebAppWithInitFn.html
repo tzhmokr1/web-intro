@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Traffic Light Web App</title>
+  <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚦</text></svg>">
+  <style>
+    .light {
+      width: 100px;
+      height: 100px;
+      border: solid black 2px;
+      text-align: center;
+    }
+
+    .light h3 {
+      line-height: 100px;
+      margin: 0;
+    }
+
+    #switch {
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+<h1>Traffic Light Web App</h1>
+<button id="switch" autofocus>Switch to Next</button>
+<div class="light">
+  <h3>Stop</h3>
+</div>
+<div class="light">
+  <h3>Attention</h3>
+</div>
+<div class="light">
+  <h3>Go</h3>
+</div>
+<script>
+  function initApp() {
+    'use strict';
+
+    // 1.1 config / constants
+    const LIGHTS_COUNT = 3;
+    const ON_COLORS = ['red', 'orange', 'darkseagreen'];
+    const OFF_COLORS = ['#910000', '#802001', '#005504'];
+
+    // 1.2 model / app-state
+    let lightState = 0;
+
+    function goToNextLightState() {
+      lightState = (lightState + 1) % LIGHTS_COUNT;
+    }
+
+    // 1.3 view references
+    const lightElements = document.querySelectorAll('.light');
+    const switchButton = document.getElementById('switch');
+
+    // 1.4 view rendering / update
+    function updateView() {
+      lightElements.forEach((lightElement, i) =>
+          lightElement.style.backgroundColor = OFF_COLORS[i]);
+      lightElements[lightState].style.backgroundColor = ON_COLORS[lightState];
+    }
+
+    // 1.5 controller & helper functions
+    function switchLights() {
+      goToNextLightState();
+      updateView();
+    }
+
+    // 1.6 attach eventListeners
+    switchButton.addEventListener('click', switchLights);
+
+    // 1.7 init view / display initial state
+    updateView();
+  }
+
+  // 2 register initApp
+  document.addEventListener('DOMContentLoaded', initApp);
+</script>
+</body>
+</html>

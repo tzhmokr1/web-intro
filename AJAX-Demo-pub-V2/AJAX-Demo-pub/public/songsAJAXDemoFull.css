@@ -1,0 +1,62 @@
+li.song-entry {
+    font-weight: bold;
+    font-size: larger;
+    margin: 5px;
+}
+
+span.artist {
+    font-style: italic;
+    white-space: nowrap;
+}
+
+#edit-song-dialog.displayed-dialog {
+    color: white;
+    background: rgba(0, 0, 0, 0.8); /*black, 80%*/
+    position: fixed;
+    padding: 20px;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+@keyframes wiggleAnimation {
+    0% {
+        transform: skewX(9deg);
+    }
+    10% {
+        transform: skewX(-8deg);
+    }
+    20% {
+        transform: skewX(7deg);
+    }
+    30% {
+        transform: skewX(-6deg);
+    }
+    40% {
+        transform: skewX(5deg);
+    }
+    50% {
+        transform: skewX(-4deg);
+    }
+    60% {
+        transform: skewX(3deg);
+    }
+    70% {
+        transform: skewX(-2deg);
+    }
+    80% {
+        transform: skewX(1deg);
+    }
+    90% {
+        transform: skewX(0deg);
+    }
+    100% {
+        transform: skewX(0deg);
+    }
+}
+
+.wiggle {
+    animation-name: wiggleAnimation;
+    animation-duration: 1s;
+}

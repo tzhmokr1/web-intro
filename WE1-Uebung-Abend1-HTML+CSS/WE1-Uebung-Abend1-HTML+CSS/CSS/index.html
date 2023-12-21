@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <title>CSS Übung</title>
+    <link
+      rel="icon"
+      href="../HSR.Template.Exercises/icon-document.png"
+      type="image/png"
+    />
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="../HSR.Template.Exercises/documentStyle.css"
+    />
+    <script src="../HSR.Template.Exercises/solutions.js"></script>
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+    <style>
+      .solutionBox {
+        width: 100%;
+        height: 5em;
+      }
+      .marked {
+        background: lightgreen;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>
+      <a class="backlink" href="../index.html">⇦</a>
+      CSS Übung
+      <button id="showSolutions">Lösungen anzeigen/ausblenden</button>
+    </h1>
+
+    <h2>Quiz 1</h2>
+    Folgendes CSS und HTML ist gegeben.
+    <pre><code>
+      img {  
+        width: 50%;
+        display: block;
+        ...  
+        ...
+      }
+      div.magic ... {  
+        content: "Magic";
+      }
+    </code></pre>
+    <pre>
+    <code>
+      &lt;h2&gt;Question 1&lt;/h2&gt;
+      &lt;img src=&quot;cuteCat.jpg&quot;&gt;
+      some text&lt;div class=&quot;magic&quot;&gt;This is ... &lt;/div&gt;    
+    </code>
+    </pre>
+    <p>Warum ist das "display: block;" nötig?</p>
+    <p>Wie muss das CSS ergänzt werden damit die Webseite wiefolgt aussieht? </p> 
+    <img src="./files/cat.jpg" width="400px">
+
+    <div class="solution">
+      <p>Display block bewirkt, dass das Bild nicht mir inline mit dem Text ist.</p>
+      <pre><code>
+        img {  
+          width: 50%;
+          display: block;
+          border: 3px solid orange;  
+          padding: 5px;
+        }
+        div.magic::after {  
+          content: "Magic";
+        }
+      </code></pre>
+
+    </div>
+
+    <h2>Quiz 2</h2>
+    Folgendes CSS und HTML ist gegeben
+    <pre><code>
+      article > h1 {
+        background-color: orange;
+      }
+      p > p {  
+        background-color: orange;
+      }    
+    </code></pre>
+    <pre>
+    <code>
+      &lt;h2&gt;Question 2&lt;/h2&gt;
+      &lt;article&gt;  
+        &lt;header&gt;
+          &lt;h1&gt;A Title&lt;/h1&gt;
+        &lt;/header&gt;
+        &lt;section&gt;
+          &lt;p&gt;start of a section       
+            &lt;p&gt; a paragraph in paragraph&lt;/p&gt;    
+          &lt;/p&gt;  
+        &lt;/section&gt;
+      &lt;/article&gt;
+      </code>
+    </pre>
+    <p>Wie Sie <a href="./files/quiz2.html">hier</a> sehen haben beide Regeln keinen Effekt.</p>
+    <p>Erklären Sie warum weder die eine noch die andere Regel einen Effekt hat</p>
+
+    <div class="solution">
+      <p>
+        Regel 1 hat keinen Effekt, weil es kein h1 gibt welches als DIREKTES Kind in einem article enhalten ist
+      </p>
+      <p>
+        Regel 2 hat keinen Effekt, weil ein p-Elemente in einem p-Element nicht erlaubt ist. 
+        Im geparsten DOM liegt das zweite p neben dem anderen p (Geschwister Elemente). 
+        Entsrechend gibt es im DOM kein p welches in einem anderen p liegt.
+      </p>
+    </div>
+
+    <h2>Basic Styling</h2>
+    <p>
+      Passen Sie das <a href="./files/tesla.css" target="_blank">CSS File</a> für das 
+      <a href="./files/tesla.html" target="_blank"> <a href="./files/tesla.html" target="_blank">Tesla HTML-File</a> 
+      so an, dass folgendes Aussehen resultiert. Passen Sie das html-File nicht an.
+    </p>
+    <img src="./files/teslaTarget.jpg" width="400px">
+
+    <div class="solution">
+      <ul>
+        <li><a href="./solutions/tesla.html" target="_blank">CSS File</a></li>
+        <li><a href="./solutions/tesla.html" target="_blank">Tesla HTML-File</a></li>
+      </ul>
+      
+    </div>
+
+    <h2>Quiz 3</h2>
+    Folgendes HTML und CSS Stylesheet ist gegeben.
+    <pre>
+      <code>
+        &lt;div id=style-box class=&quot;style-box&quot;&gt;
+        &lt;/div&gt;      
+      </code>
+    </pre>
+    <pre><code>
+      #style-box::before {
+        content: "A";
+      }
+      .style-box::before {
+        content: "B";
+      }
+      </code></pre>
+    <p><strong>FRAGE:</strong> Was erscheint im div: "A" oder "B" (d.h. welche der beiden Regeln ist stärker?)</p>
+
+    <div class="solution">
+      <p>
+        Es erscheint A. Die erste Regel ist stärker, da die Regeln mit einem ID-Selektor 
+        stärker ist als die Regel einem Class-Selektor
+      </p>
+    </div>
+
+    <h2>Quiz 4</h2>
+    Gleiches HTML wie in Aufgabe 3 ist gegeben mit folgendem CSS Stylesheet.
+    <pre><code>
+      * .style-box::before {
+        content: "A";
+      }
+  
+      .style-box::before {
+        content: "B";
+      }
+    </code></pre>
+    <p><strong>FRAGE:</strong> Was erscheint im div: "A" oder "B" (d.h. welche der beiden Regeln ist stärker?)</p>
+
+    <div class="solution">
+      <p>
+        Es erscheint B. Beide Regeln sind gleich stark, da der universelle Selektor (*) keinen Einfluss hat. 
+        Wenn Regeln gleich stark sind, dann gewinnt die letzte.
+      </p>
+    </div>
+
+    <h2>Quiz 5</h2>
+    Gleiches HTML wie in Aufgabe 3/4 ist gegeben mit folgendem CSS Stylesheet.
+    <pre><code>
+      :root .style-box::before {
+        content: "A";
+      }
+  
+      body .style-box::before {
+        content: "B";
+      }
+      </code></pre>
+    <p><strong>FRAGE:</strong> Was erscheint im div: "A" oder "B" (d.h. welche der beiden Regeln ist stärker?)</p>
+
+    <div class="solution">
+      <p>
+        Es erscheint A. (Pseudo)-Class-Selektoren sind stärker als Element-Selektoren.
+      </p>
+    </div>
+
+    <h2>Quiz 6</h2>
+    Gleiches HTML wie in Aufgabe 3/4 ist gegeben mit folgendem CSS Stylesheet.
+    <pre><code>
+      :root .style-box.style-box::before {
+        content: "A";
+      }
+      :root .style-box::before {
+        content: "B";
+      }  
+    </code></pre>
+    <p><strong>FRAGE:</strong> Was erscheint im div: "A" oder "B" (d.h. welche der beiden Regeln ist stärker?)</p>
+
+    <div class="solution">
+      <p>
+        Es erscheint A. Die Wiederholung des Klassen-Selektors bewirkt, dass der Selektor der ersten Regel
+        eine höhere "Specificity" hat.
+      </p>
+    </div>
+
+    <h2>Tabelle Stylen</h2>
+    <p>
+      Stylen Sie die Tabelle in der <a href="files/table.html">Vorlage</a>.
+      Nutzen Sie ausschliesslich CSS um die Tabelle wie folgt zu Stylen:
+    </p>
+    <p>Ändern Sie die Hintergrundfarbe im Hover-State.</p>
+    <p>
+      Vergessen Sie das Warn-Zeichen nicht. Am HTML dürfen keine Anpassungen
+      vorgenommen werden.
+    </p>
+    <img src="files/table.png" style="width: 250px" />
+
+    <div class="solution">
+      <a href="solutions/table.html">Lösung</a>
+    </div>
+
+    <h2>Selektoren grosse Aufgabe (optinal)</h2>
+<p>
+    Das folgende CSS und HTML ist gegeben. Die CSS Regeln sind nummeriert. Füllen Sie de Tabelle aus.
+    Jede Zeile bezieht auf den jeweiligen Start Tag.
+</p>
+<ul>
+    <li><strong>Regel-Nr</strong> Notieren Sie alle Regeln, welche das Tag direkt selektieren.</li>
+    <li><strong>Font-Px</strong> Notieren Sie die Grösse des Fonts in Pixel.</li>
+    <li><strong>Font-Stil</strong> Notieren Sie den speziellen Font-Stils z.B. italic.</li>
+    <li><strong>Hintergrundfarbe</strong> Notieren Sie die Hintergrundfarbe.</li>
+</ul>
+<div style="display: flex">
+<pre class="prettyprint" style="width: 320px">
+			<code>body { /* 01 */
+  font-size: 16px;
+}
+
+main { /* 02 */
+  border: solid black 1px;
+  width: 300px;
+}
+
+h1 { /* 03 */
+  font-size: 1.5em;
+}
+
+label { /* 04 */
+  display: block;
+  margin: 10px;
+}
+
+label > span { /* 05 */
+  display: inline-block;
+  width: 100px;
+  text-align: right;
+  border: solid black 1px;
+}
+
+input { /* 06 */
+  width: 130px;
+}
+
+.required span { /* 07 */
+  font-style: italic;
+}
+
+label.required > span::before {
+  /* 08 */
+  content: " * ";
+}</code></pre>
+
+    <pre class="prettyprint" style="width: 320px">
+			<code>label input { /* 09 */
+  background-color: green;
+}
+
+#first-name { /* 10 */
+  background-color: salmon;
+}
+
+.box { /* 11 */
+  border: solid black 1px;
+  margin: 2px;
+}
+
+section > .box { /* 12 */
+  width: 240px;
+}
+
+.box > .box { /* 13 */
+  font-size: 1.5em;
+}
+
+.box > .box > .box { /* 14 */
+  background-color: salmon;
+}
+
+.box > .box > .box:hover { /* 15 */
+  background-color: green;
+}
+			</code>
+		</pre>
+
+        <pre class="prettyprint"><code>
+            Regel-Nr   | Font-Px    | Font-Stil | Hint-Farbe
+            ___________|___________ |___________| ___________ | &#x3C;body&#x3E;
+            ___________|___________ |___________| ___________ | &#x3C;h1&#x3E;WED1 CSS Aufgabe&#x3C;/h1&#x3E;
+            ___________|___________ |___________| ___________ | &#x3C;main class=&#x22;label&#x22;&#x3E;
+            ___________|___________ |___________| ___________ |     &#x3C;section id=&#x22;label &#x3E; span&#x22;&#x3E;
+            ___________|___________ |___________| ___________ |         &#x3C;label class=&#x22;required&#x22;&#x3E;
+            ___________|___________ |___________| ___________ |             &#x3C;span&#x3E;First Name&#x3C;/span&#x3E;
+            ___________|___________ |___________| ___________ |             &#x3C;input id=&#x22;first-name&#x22;/&#x3E;
+                                                                        &#x3C;/label&#x3E;
+            ___________|___________ |___________| ___________ |         &#x3C;label&#x3E;
+            ___________|___________ |___________| ___________ |             &#x3C;span class=&#x22;first-name&#x22;&#x3E;First Name&#x3C;/span&#x3E;
+            ___________|___________ |___________| ___________ |             &#x3C;input id=&#x22;last-name&#x22;/&#x3E;
+                                                                        &#x3C;/label&#x3E;
+                                                                    &#x3C;/section&#x3E;
+            ___________|___________ |___________| ___________ |     &#x3C;section id=&#x22;label&#x22;&#x3E;
+            ___________|___________ |___________| ___________ |         &#x3C;div class=&#x22;box&#x22;&#x3E;
+            ___________|___________ |___________| ___________ |             &#x3C;span id=&#x22;box&#x22;&#x3E;box1&#x3C;/span&#x3E;
+            ___________|___________ |___________| ___________ |             &#x3C;div class=&#x22;box&#x22;&#x3E;
+            ___________|___________ |___________| ___________ |                 &#x3C;span&#x3E;box1.1&#x3C;/span&#x3E;
+            ___________|___________ |___________| ___________ |                 &#x3C;div class=&#x22;box&#x22;&#x3E;
+            ___________|___________ |___________| ___________ |                     &#x3C;span&#x3E;box1.1.1&#x3C;/span&#x3E;
+                                                                                &#x3C;/div&#x3E;
+                                                                            &#x3C;/div&#x3E;
+            ___________|___________ |___________| ___________ |             &#x3C;div class=&#x22;box&#x22;&#x3E;
+            ___________|___________ |___________| ___________ |                 &#x3C;span&#x3E;box1.2&#x3C;/span&#x3E;
+                                                                            &#x3C;/div&#x3E;
+                                                                        &#x3C;/div&#x3E;
+                                                                    &#x3C;/section&#x3E;
+                                                                &#x3C;/main&#x3E;</code>
+                    </pre>
+            </div>
+    
+<div class="solution">
+    <a href="solutionSelektoren.html">Sie können ihre Lösung mit den Debug-Tools validieren</a>
+
+    <pre class="prettyprint"><code>
+        Regel-Nr   | Font-Px    | Font-Stil | Hint-Farbe
+        ___01______|___16______ |___________| ___________ | &#x3C;body&#x3E;
+        ___03______|___24______ |___________| ___________ | &#x3C;h1&#x3E;WED1 CSS Aufgabe&#x3C;/h1&#x3E;
+        ___02______|___16______ |___________| ___________ | &#x3C;main class=&#x22;label&#x22;&#x3E;
+        ___________|___16______ |___________| ___________ |     &#x3C;section id=&#x22;label &#x3E; span&#x22;&#x3E;
+        ___04______|___16______ |___________| ___________ |         &#x3C;label class=&#x22;required&#x22;&#x3E;
+        05, 07, 08_|___16______ |_italics___| ___________ |             &#x3C;span&#x3E;First Name&#x3C;/span&#x3E;
+        06, 09, 10_|___16______ |___________| ___salmon__ |             &#x3C;input id=&#x22;first-name&#x22;/&#x3E;
+                                                                    &#x3C;/label&#x3E;
+        ___04______|___16______ |___________| ___________ |         &#x3C;label&#x3E;
+        ___05______|___16______ |___________| ___________ |             &#x3C;span class=&#x22;first-name&#x22;&#x3E;First Name&#x3C;/span&#x3E;
+        06, 09_____|___16______ |___________| ___green___ |             &#x3C;input id=&#x22;last-name&#x22;/&#x3E;
+                                                                    &#x3C;/label&#x3E;
+                                                                &#x3C;/section&#x3E;
+        ___________|____16_____ |___________| ___________ |     &#x3C;section id=&#x22;label&#x22;&#x3E;
+        ___11, 12__|____16_____ |___________| ___________ |         &#x3C;div class=&#x22;box&#x22;&#x3E;
+        ___________|____16_____ |___________| ___________ |             &#x3C;span id=&#x22;box&#x22;&#x3E;box1&#x3C;/span&#x3E;
+        ___11, 13__|____24_____ |___________| ___________ |             &#x3C;div class=&#x22;box&#x22;&#x3E;
+        ___________|____24_____ |___________| ___________ |                 &#x3C;span&#x3E;box1.1&#x3C;/span&#x3E;
+        11,13,14,(hov:15)|_36__ |___________|salmon (hov:green)|                &#x3C;div class=&#x22;box&#x22;&#x3E;
+        ___________|____36_____ |___________| ___________ |                     &#x3C;span&#x3E;box1.1.1&#x3C;/span&#x3E;
+                                                                            &#x3C;/div&#x3E;
+                                                                        &#x3C;/div&#x3E;
+        ___11, 13__|____24_____ |___________| ___________ |             &#x3C;div class=&#x22;box&#x22;&#x3E;
+        ___________|____24_____ |___________| ___________ |                 &#x3C;span&#x3E;box1.2&#x3C;/span&#x3E;
+                                                                        &#x3C;/div&#x3E;
+                                                                    &#x3C;/div&#x3E;
+                                                                &#x3C;/section&#x3E;
+                                                            &#x3C;/main&#x3E;</code>
+                </pre>   
+</div>
+
+
+
+  </body>
+</html>

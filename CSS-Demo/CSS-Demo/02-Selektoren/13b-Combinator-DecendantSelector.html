@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Combinator Decendant Selector Demo</title>
+  <style>
+    .recent h1 {
+      background: bisque;
+      font-size: 40px;
+      font-variant-caps: small-caps;
+    }
+
+    .recent h1::before {
+      content: "Breaking News: ";
+    }
+  </style>
+</head>
+<body>
+<article class="recent">
+  <header>
+  <h1>Baby Panda Born</h1>
+  </header>
+  <p>
+    Panda brothers Pit and Paule took their first steps outside Wednesday
+    with their mother Meng Meng at Zoo Berlin. The twins -- the first pandas ever to be born
+    in Germany -- are on view to the public for the first time on Thursday.
+  </p>
+  <footer>Disclaimer: ...</footer>
+</article>
+<article>
+  <header>
+  <h1>Global Warming: Four Degree Warming Out Of Reach </h1>
+  </header>
+  <p>
+    Climate models predict we’re currently on track for a heating of somewhere
+    between 3C and 4C for 2100, although bear in mind that these are global average
+    temperatures – at the poles and over land (where people live), the increase may
+    be double that. Predictions are tricky, however, as temperatures depend on how
+    sensitive the climate is to carbon dioxide (CO2).
+  </p>
+  <footer>Disclaimer: ...</footer>
+</article>
+
+</body>
+</html>

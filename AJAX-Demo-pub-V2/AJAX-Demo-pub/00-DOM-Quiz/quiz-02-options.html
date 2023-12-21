@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Quiz 02 Options</title>
+    <style>
+        #btn1::before, #btn1::after {
+            content: ' *** ';
+        }
+        #btn2::before, #btn2::after {
+            content: ' xxx ';
+        }
+    </style>
+</head>
+<body>
+<h1>Quiz 02 Options</h1>
+<div>
+    <h3>Option A</h3>
+    <input type="button" value="input button">
+    <button>Button Button</button>
+</div>
+<div>
+    <h3>Option B</h3>
+    <input type="button" value=" *** input button *** ">
+    <button> xxx Button Button xxx </button>
+</div>
+</body>
+<div>
+    <h3>Option C</h3>
+    *** <input type="button" value="input button"> ***
+    xxx <button>Button Button</button> xxx
+</div>
+<div>
+    <h3>Option D</h3>
+    <input id="btn1" type="button" value="input button">
+    <button id="btn2">Button Button</button>
+</div>
+
+</html>

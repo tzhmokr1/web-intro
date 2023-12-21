@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Songs JSON Server Demo</title>
+</head>
+<body>
+<h1>JSON Server Demo</h1>
+<p>Use the terminal to start the json-server for the demo. See README.md for details</p>
+<ul>
+    <li><a href="http://localhost:3000/songs">get songs json</a> </li>
+    <li><a href="http://localhost:3000/songs/02">get json of song 02</a> </li>
+    <li><a href="http://localhost:3000/songs/04">get json of song 04</a> </li>
+    <li>Use Insomnia or Postman to create a POST request and create a new song entry. Make sure header is set to
+        <pre>
+'Accept': 'application/json',
+'Content-Type': 'application/json'
+        </pre>
+        and a json body is set e.g.
+        <pre>
+{
+    "title": "My New Song",
+    "artist": "TBD",
+    "rating": 0
+}
+        </pre>
+        or use this curl request (unix shell)
+        <pre>
+curl --request POST \
+  --url http://localhost:3000/songs/ \
+  --header 'accept: application/json' \
+  --header 'content-type: application/json' \
+  --data '{"title":"My New Song 2","artist":"TBD","rating":0}'
+        </pre>
+        or use this fetch request (JS console)
+        <pre>
+fetch("http://localhost:3000/songs/", {
+  "method": "POST",
+  "headers": {
+    "accept": "application/json",
+    "content-type": "application/json"
+  },
+  "body": JSON.stringify({
+    "title": "My New Song 3",
+    "artist": "TBD",
+    "rating": 0
+  })
+})
+.then(response => {
+  console.log(response);
+})
+.catch(err => {
+  console.error(err);
+});
+        </pre>
+    </li>
+    <li>Launch <a href="asyncSongsPlusProgress.html">asyncSongsPlusProgress.html</a></li>
+</ul>
+
+</body>
+</html>

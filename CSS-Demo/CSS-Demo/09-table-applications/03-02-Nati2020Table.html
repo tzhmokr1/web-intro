@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>SRF Hockey National League</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    table, tbody, tfoot, thead, td, th {
+      border: 0;
+      margin: 0;
+      padding: 0;
+      font: inherit;
+    }
+
+    table {
+      width: 100%;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 13px;
+      text-align: center;
+      border-collapse: collapse;
+      border-spacing: 0;
+      color: #555;
+    }
+
+    th {
+      background-color: #e2e0d7;
+      height: 30px;
+      color: #222;
+    }
+
+
+    tr td {
+      height: 30px;
+      border-top: 2px solid #fff;
+      padding: 0 4px;
+    }
+
+    tr td.competitor {
+      background-position: 5px center;
+      background-repeat: no-repeat;
+      background-size: 15px auto;
+      text-align: left;
+      padding-left: 38px;
+
+    }
+
+    tr td.rank {
+      padding: 0 0 0 4px;
+      width: 30px;
+    }
+
+    tr.playoff td.rank,
+    tr.promoted td.rank,
+    tr.winner td.rank {
+      background-color: #209e03;
+      color: #fff;
+    }
+
+    tr td.points {
+      background-color: #ffa800;
+      width: 42px;
+      padding-top: 1px;
+      color: #222;
+    }
+
+    tr.divider td {
+      height: 10px;
+      background: linear-gradient(to bottom, #fff 0%, #fff 40%, #aaa 48.5%, #aaa 51.5%, #fff 60%, #fff 100%);
+      background-size: cover;
+      background-position: center;
+    }
+
+    tr {
+      background-color: #f5f5f2;
+    }
+
+    tr:focus,
+    tr:hover {
+      outline: none;
+      background-color: #e2e0d7;
+    }
+
+    /*background-color: #209e03;*/
+    /*background-color: #e2e0d7;*/
+    /*background-color: #e2e0d7;*/
+    /*background-color: #f5f5f2;*/
+    /*background-color: #ffa800;*/
+    /*background-position: 5px center;*/
+    /*background-position: center;*/
+    /*background-repeat: no-repeat;*/
+    /*background-size: 15px auto;*/
+    /*background-size: cover;*/
+    /*background: linear-gradient(to bottom, #fff 0%, #fff 40%, #aaa 48.5%, #aaa 51.5%, #fff 60%, #fff 100%);*/
+    /*border-collapse: collapse;*/
+    /*border-spacing: 0;*/
+    /*border-top: 2px solid #fff;*/
+    /*border: 0;*/
+    /*box-sizing: border-box;*/
+    /*color: #222;*/
+    /*color: #222;*/
+    /*color: #555;*/
+    /*color: #fff;*/
+    /*font-family: Arial, Helvetica, sans-serif;*/
+    /*font-size: 13px;*/
+    /*font: inherit;*/
+    /*height: 10px;*/
+    /*height: 30px;*/
+    /*height: 30px;*/
+    /*margin: 0;*/
+    /*outline: none;*/
+    /*padding-left: 38px;*/
+    /*padding: 0 0 0 4px;*/
+    /*padding: 0;*/
+    /*text-align: center;*/
+    /*text-align: left;*/
+    /*width: 100%;*/
+    /*width: 30px;*/
+    /*width: 42px;*/
+
+
+  </style>
+</head>
+<body>
+<h1>SRF Hockey National League</h1>
+<p>Data taken 2020-03-07</p>
+<p>See original <a href="https://m.srf.ch/sport/resultcenter/results#hockey/nla/rankings">SRF page</a></p>
+<table>
+  <thead>
+  <tr>
+    <th colspan="2"></th>
+    <th>Sp</th>
+    <th>Tore</th>
+    <th>P</th>
+  </tr>
+  </thead>
+  <tbody class="highlight-nation">
+  <tr tabindex="0" class="qualifier-role playoff">
+    <td class="rank">1.</td>
+    <td class="competitor" title="ZSC Lions, SUI" style="background-image: url('https://cdn-csd.swisstxt.ch/images/sport/club/logo/medium/21.png');">
+      ZSC Lions
+    </td>
+    <td>50</td>
+    <td>166:124</td>
+    <td class="points">91</td>
+  </tr>
+  <tr tabindex="0" class="qualifier-role playoff">
+    <td class="rank">2.</td>
+    <td class="competitor" title="Zug, SUI" style="background-image: url('https://cdn-csd.swisstxt.ch/images/sport/club/logo/medium/22.png');">Zug
+    </td>
+    <td>50</td>
+    <td>147:124</td>
+    <td class="points">90</td>
+  </tr>
+  <tr tabindex="0" class="qualifier-role playoff">
+    <td class="rank">3.</td>
+    <td class="competitor" title="Davos, SUI" style="background-image: url('https://cdn-csd.swisstxt.ch/images/sport/club/logo/medium/7.png');">Davos
+    </td>
+    <td>50</td>
+    <td>159:142</td>
+    <td class="points">89</td>
+  </tr>
+  <tr tabindex="0" class="qualifier-role playoff">
+    <td class="rank">4.</td>
+    <td class="competitor" title="Genf-Servette, SUI"
+        style="background-image: url('https://cdn-csd.swisstxt.ch/images/sport/club/logo/medium/19.png');">Genf-Servette
+    </td>
+    <td>50</td>
+    <td>140:116</td>
+    <td class="points">89</td>
+  </tr>
+  <tr tabindex="0" class="qualifier-role playoff">
+    <td class="rank">5.</td>
+    <td class="competitor" title="Biel, SUI" style="background-image: url('https://cdn-csd.swisstxt.ch/images/sport/club/logo/medium/3.png');">Biel
+    </td>
+    <td>50</td>
+    <td>151:144</td>
+    <td class="points">78</td>
+  </tr>
+  <tr tabindex="0" class="qualifier-role playoff">
+    <td class="rank">6.</td>
+    <td class="competitor" title="Lausanne, SUI" style="background-image: url('https://cdn-csd.swisstxt.ch/images/sport/club/logo/medium/13.png');">
+      Lausanne
+    </td>
+    <td>50</td>
+    <td>136:131</td>
+    <td class="points">75</td>
+  </tr>
+  <tr tabindex="0" class="qualifier-role playoff">
+    <td class="rank">7.</td>
+    <td class="competitor" title="Freiburg, SUI" style="background-image: url('https://cdn-csd.swisstxt.ch/images/sport/club/logo/medium/8.png');">
+      Freiburg
+    </td>
+    <td>50</td>
+    <td>122:136</td>
+    <td class="points">73</td>
+  </tr>
+  <tr tabindex="0" class="qualifier-role playoff">
+    <td class="rank">8.</td>
+    <td class="competitor" title="Lugano, SUI" style="background-image: url('https://cdn-csd.swisstxt.ch/images/sport/club/logo/medium/14.png');">
+      Lugano
+    </td>
+    <td>50</td>
+    <td>125:139</td>
+    <td class="points">69</td>
+  </tr>
+  <tr class="divider">
+    <td colspan="5"></td>
+  </tr>
+  <tr tabindex="0" class="qualifier-role relegationround">
+    <td class="rank">9.</td>
+    <td class="competitor" title="Bern, SUI" style="background-image: url('https://cdn-csd.swisstxt.ch/images/sport/club/logo/medium/2.png');">Bern
+    </td>
+    <td>50</td>
+    <td>131:142</td>
+    <td class="points">68</td>
+  </tr>
+  <tr tabindex="0" class="qualifier-role relegationround">
+    <td class="rank">10.</td>
+    <td class="competitor" title="Ambri-Piotta, SUI"
+        style="background-image: url('https://cdn-csd.swisstxt.ch/images/sport/club/logo/medium/1.png');">Ambri-Piotta
+    </td>
+    <td>50</td>
+    <td>120:136</td>
+    <td class="points">63</td>
+  </tr>
+  <tr tabindex="0" class="qualifier-role relegationround">
+    <td class="rank">11.</td>
+    <td class="competitor" title="SCL Tigers, SUI" style="background-image: url('https://cdn-csd.swisstxt.ch/images/sport/club/logo/medium/12.png');">
+      SCL Tigers
+    </td>
+    <td>50</td>
+    <td>117:148</td>
+    <td class="points">63</td>
+  </tr>
+  <tr tabindex="0" class="qualifier-role relegationround">
+    <td class="rank">12.</td>
+    <td class="competitor" title="Lakers, SUI" style="background-image: url('https://cdn-csd.swisstxt.ch/images/sport/club/logo/medium/18.png');">
+      Lakers
+    </td>
+    <td>50</td>
+    <td>129:161</td>
+    <td class="points">52</td>
+  </tr>
+  </tbody>
+</table>
+
+</body>
+</html>

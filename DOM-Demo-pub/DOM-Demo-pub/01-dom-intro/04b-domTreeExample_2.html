@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Seitenname</title>
+</head>
+<body>
+<nav>
+    <ul>
+        <li>
+            <a href="#">Linktext 1</a>
+        </li>
+        <li>
+            <a href="#">Linktext 2</a>
+        </li>
+    </ul>
+</nav>
+<main>
+    <!--Kommentar-->
+    <h1>Überschrift</h1>
+    <p>
+        Textinhalt
+        <img src="#">
+    </p>
+</main>
+
+<script>
+
+
+    function printTree_with_whitespaces(node, level) {
+        console.log("".padStart(level * 2), node.tagName || node.nodeName);
+
+        for (const nodeChild of node.childNodes) {
+            printTree_with_whitespaces(nodeChild, level + 1);
+        }
+    }
+
+    printTree_with_whitespaces(document.children[0], 0);
+
+</script>
+
+</body>
+</html>

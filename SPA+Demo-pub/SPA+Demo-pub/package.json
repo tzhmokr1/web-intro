@@ -1,0 +1,13 @@
+{
+  "name": "spa-demo",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "json-server --watch jsonDB.json",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "markus stolze",
+  "license": "MIT",
+  "dependencies": {
+    "json-server": "^0.16.1"
+  }
+}

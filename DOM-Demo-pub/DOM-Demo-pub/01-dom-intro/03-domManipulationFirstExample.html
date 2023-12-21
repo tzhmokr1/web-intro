@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>DOM Manipulation First Example</title>
+</head>
+<body>
+<div id="toChange">
+  Replace Me
+</div>
+<div id="otherDiv">
+  Do not replace me
+</div>
+<script>
+  document.getElementById('toChange').textContent = 'Replaced!';
+  console.log('document.getElementById(\'toChange\').textContent = \'Replaced!\';')
+</script>
+</body>
+</html>

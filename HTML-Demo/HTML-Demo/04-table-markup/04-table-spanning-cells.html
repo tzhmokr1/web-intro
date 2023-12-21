@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Spanning Cells Table</title>
+  <style>
+    h2 {
+      margin-bottom: 2px
+    }
+
+    table,
+    td {
+      border: 1px solid black;
+    }
+
+    caption {
+      caption-side: bottom;
+    }
+
+    thead,
+    tfoot {
+      background-color: black;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+<h1>Spanning Cells Table</h1>
+<h2>Table</h2>
+<table>
+  <tbody>
+  <tr>
+    <td rowspan="2">cell 1.1 + 2.1</td>
+    <td colspan="2">cell 1.2 + 1.3</td>
+  </tr>
+  <tr>
+    <td>cell 2.2 </td>
+  </tr>
+  </tbody>
+  <tfoot>
+  <tr>
+    <th>foot 1</th>
+    <th>foot 2</th>
+    <th>foot 3</th>
+  </tr>
+  </tfoot>
+</table>
+</body>
+</html>

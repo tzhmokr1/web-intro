@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Display Demo</title>
+    <style>
+        .container{
+            border: 1px black solid;
+            background: lightgray;
+
+        }
+        .container > span{
+            border: 1px solid black;
+            height: 30px;
+            width: 150px;
+            background: gray;
+            box-sizing: border-box;
+        }
+        .inline > span{
+            display: inline;
+        }
+        .inline-block > span{
+            display: inline-block;
+        }
+
+        .block > span{
+            display: block;
+        }
+        div{
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+<div class="container inline">
+    <span>SPAN</span>
+    <span>SPAN</span>
+    <span>SPAN</span>
+    <span>SPAN</span>
+    <span>SPAN</span>
+    <span>SPAN</span>
+    <span>SPAN</span>
+    <span>SPAN</span>
+    <span>SPAN</span>
+    <span>SPAN</span>
+    <span>SPAN</span>
+    <span>SPAN</span>
+    <span>SPAN</span>
+    <span>SPAN</span>
+    <span>SPAN</span>
+    <span>SPAN</span>
+    <span>SPAN</span>
+</div>
+<div class="container inline-block">
+    <span>SPAN</span>
+    <span>SPAN</span>
+    <span>SPAN</span>
+    <span>SPAN</span>
+    <span>SPAN</span>
+    <span>SPAN</span>
+</div>
+<div class="container block">
+    <span>SPAN</span>
+    <span>SPAN</span>
+    <span>SPAN</span>
+    <span>SPAN</span>
+    <span>SPAN</span>
+    <span>SPAN</span>
+</div>
+
+
+</body>
+</html>

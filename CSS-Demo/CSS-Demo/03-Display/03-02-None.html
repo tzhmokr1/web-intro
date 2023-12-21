@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Display None Demo</title>
+  <style>
+    span {
+      display: inline-block;
+    }
+
+    span > span {
+      width: 60px;
+      height: 60px;
+
+    }
+
+    span:nth-of-type(3) > span {
+      visibility: hidden;
+    }
+
+    span:nth-of-type(5) > span {
+      display: none;
+
+    }
+
+    span:nth-of-type(7) > span {
+      opacity: 0;
+    }
+
+    body > span {
+      border: 1px black solid;
+    }
+
+    span > span:hover {
+      background: red;
+      opacity: 1;
+      visibility: visible;
+    }
+
+  </style>
+</head>
+<body>
+<span>
+    <span>1</span>
+</span>
+<span>
+    <span>2</span>
+</span>
+<span>
+    <span>3</span>
+</span>
+<span>
+    <span>4</span>
+</span>
+<span>
+    <span>5</span>
+</span>
+<span>
+    <span>6</span>
+</span>
+<span>
+    <span>7</span>
+</span>
+</body>
+</html>

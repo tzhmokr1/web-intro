@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Rate die Zahl</title>
+  <script src="02e-guessTheNumberScript.js"></script>
+
+  <script type="text/plain" id="TEXT_TOO_HIGH">Zu hoch</script>
+  <script type="text/plain" id="TEXT_TOO_LOW">Zu tief</script>
+  <script type="text/plain" id="TEXT_YOU_GUESSED_TOO_HIGH">Du hast zu hoch geraten.</script>
+  <script type="text/plain" id="TEXT_YOU_GUESSED_TOO_LOW">Du hast zu tief geraten</script>
+</head>
+<body>
+<h1>Rate die Zahl</h1>
+<div id="introDiv">
+  <h2>Willst Du ein Spiel spielen? Es geht darum eine Zahl zuischen 1 und 100 zu raten.</h2>
+  <button id="startBtn">Spiel Starten</button>
+</div>
+<div id="guessingHistoryDiv" hidden>
+  <label for="guessHistoryOutput">Deine geratene Zahl:</label>
+  <output id="guessHistoryOutput"></output>
+</div>
+<div id="guessingDiv" hidden>
+  <p>Dies ist die Runde Nummer
+    <output id="roundOut"></output>
+  </p>
+  <label for="guessInput">Was rätst Du?</label>
+  <input id="guessInput">
+  <button id="checkBtn">Überprüfen</button>
+</div>
+<div id="evalGuessDiv" hidden>
+  <p>Du hast folgende Zahl geraten
+    <output id="guessOut"></output>
+  </p>
+  <output id="guessEvalOut"></output>
+  <button id="guessAgainBtn">Weiter machen?</button>
+</div>
+<div id="endDiv" hidden>
+  <p>Super, geschafft in folgender Anzahl Runden:
+    <output id="resultRoundsOut"></output>
+    Um die folgende "versteckte" Zahl zu finden:
+    <output id="guessedNumberOut"></output>
+  </p>
+  <p>Nochmals spielen??</p>
+  <button id="reStartBtn">Nochmals spielen</button>
+</div>
+</body>
+</html>

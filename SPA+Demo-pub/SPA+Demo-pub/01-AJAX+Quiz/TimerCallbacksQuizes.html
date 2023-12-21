@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Timer Callbacks Quizes</title>
+</head>
+<body>
+<h1>Timer Callbacks Quizes</h1>
+<p>open console to view output</p>
+<script>
+
+  function quiz1() {
+    console.log("Quiz 1 - START");
+    const sequence = ["A", "B", "C"];
+    sequence.forEach(element => {
+      setTimeout(() => console.log("T1:", element), 0);
+      console.log("M1:", element);
+    })
+    console.log("Quiz 1 - END");
+  }
+
+  quiz1();
+
+
+  function quiz2() {
+    // attention: trick-question
+    console.log("Quiz 2 - START");
+    const sequence = ["A", "B", "C"];
+    sequence.forEach(element => {
+      setTimeout(console.log("T2:", element), 0);
+      console.log("M2:", element);
+    })
+    console.log("Quiz 2 - END");
+  }
+
+  setTimeout(quiz2, 500);
+
+
+  function quiz3() {
+    console.log("Quiz 3 - START");
+    const sequence = ["A", "B", "C"];
+    const logFn = () =>
+      sequence.forEach(element => console.log("T3:", element));
+    setTimeout(logFn, 0);
+    console.log("Quiz 3 - END");
+  }
+
+  setTimeout(quiz3, 1000);
+
+  function quiz4() {
+    // attention: trick-question
+    console.log("Quiz 4 - START");
+    const sequence = ["A", "B", "C"];
+    const logFn = () =>
+      sequence.forEach(element => console.log("T4:", element));
+    setTimeout(logFn(), 0);
+    console.log("Quiz 4 - END");
+  }
+
+  setTimeout(quiz4, 1500);
+
+
+  function quiz5() {
+    // attention: trick-question
+    console.log("Quiz 5 - START");
+    const sequence = ["A", "B", "C"];
+    let i;
+    for (i = 0; i < sequence.length; i++) {
+      setTimeout(() => console.log("T5:", sequence[i]), 0);
+      //console.log("M5:", sequence[i]);
+    }
+    console.log("Quiz 5 - END");
+  }
+
+  setTimeout(quiz5, 2000);
+
+
+  function promiseValueAfterWait(value, waitMilliSeconds) {
+    //returns a Promise that resolves to <value> after <waitMilliSeconds>
+    return new Promise(resolve => setTimeout(() => resolve(value), waitMilliSeconds));
+  }
+
+
+  function quiz6() {
+    console.log("Quiz 6 - START");
+    const sequence = ["A", "B", "C"];
+    sequence.forEach(element => {
+      promiseValueAfterWait(element, 0)
+        .then(
+          () => console.log("P6:", element))
+      console.log("M6:", element);
+    })
+    console.log("Quiz 6 - END");
+  }
+
+  setTimeout(quiz6, 2500);
+
+
+  function quiz7() {
+    //attention: somewhat tricky
+    console.log("Quiz 7 - START");
+    const sequence = ["A", "B", "C"];
+    sequence.forEach(async function (element) {
+      const pValue = await promiseValueAfterWait(element, 0);
+      console.log("P7:", pValue);
+      console.log("M7:", element);
+    })
+    console.log("Quiz 7 - END");
+  }
+
+  setTimeout(quiz7, 3000);
+
+</script>
+</body>
+</html>

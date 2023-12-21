@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Pseudo Element Demo</title>
+  <style>
+    .container::first-line {
+      background: red;
+    }
+
+    .emphasized::first-letter {
+      font-weight: bold;
+    }
+
+    /*DEMO: comment out -> ::first-letter not working*/
+    span {
+      display: inline-block;
+    }
+
+    /*DEMO: comment in -> ::first-letter now applys to before*/
+    /*span::before {*/
+    /*  content: "xxx";*/
+    /*}*/
+
+  </style>
+
+</head>
+<body>
+<div class="container">
+  <span class="emphasized">Das ist eine kurze Zeile</span>
+  <span class="emphasized">Das ist eine kurze Zeile</span>
+  <span class="emphasized">Das ist eine kurze Zeile</span>
+  <p class="container emphasized">Das ist eine sehr sehr lange Zeile. Das ist eine sehr sehr lange Zeile. Das ist eine sehr sehr lange Zeile. Das ist eine sehr
+    sehr
+    lange Zeile. Das ist
+    eine sehr sehr lange Zeile. Das ist eine sehr sehr lange Zeile. Das ist eine sehr sehr lange Zeile.</p>
+</body>
+</html>

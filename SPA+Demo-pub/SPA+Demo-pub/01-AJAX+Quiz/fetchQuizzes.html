@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Fetch Quizzes</title>
+</head>
+<body>
+<h1>Fetch Quizzes</h1>
+<div id="out1">out1</div>
+<div id="out2">out2</div>
+<div id="out3">out3</div>
+<div id="out4">out4</div>
+<div id="out5">out5</div>
+<div id="out6">out6</div>
+<div id="out7">out7</div>
+<script>
+  const songsServiceURL = "http://localhost:3000/songs/"
+  const songId = "01";
+
+  //view refs
+  const out1Element = document.getElementById("out1");
+  const out2Element = document.getElementById("out2");
+  const out3Element = document.getElementById("out3");
+  const out4Element = document.getElementById("out4");
+  const out5Element = document.getElementById("out5");
+  const out6Element = document.getElementById("out6");
+  const out7Element = document.getElementById("out7");
+
+  function tryFetch1 () {
+    fetch(songsServiceURL+songId)
+      .then(song => out1Element.textContent = String(song.id));
+  }
+  tryFetch1();
+
+
+  function tryFetch2 () {
+    fetch(songsServiceURL+songId)
+      .then(response => response.json())
+      .then(song => out2Element.textContent = String(song.id));
+  }
+  tryFetch2();
+
+  async function tryFetch3 () {
+    const response = await fetch(songsServiceURL+songId);
+    const song = await response.json();
+    out3Element.textContent = String(song.id);
+  }
+  tryFetch3();
+
+  async function tryFetch4 () {
+    const response = await fetch(songsServiceURL+songId);
+    response.json().then(song =>
+      out4Element.textContent = String(song.id));
+  }
+  tryFetch4();
+
+  function renderToOut5 (song) {
+    out5Element.textContent = String(song.id);
+  }
+  async function getSong () {
+    return fetch(songsServiceURL+songId)
+      .then(response => response.json());
+  }
+
+  function tryFetch5 () {
+    //not working [del@@@comment]
+    getSong(renderToOut5);
+  }
+  tryFetch5();
+
+  function renderToOut6 (song) {
+    out6Element.textContent = String(song.id);
+  }
+
+  function tryFetch6 () {
+    getSong().then(renderToOut6);
+  }
+  tryFetch6();
+
+  function getSong2 (processReturnedSongCallbackFn) {
+    fetch(songsServiceURL+songId)
+      .then(response => response.json())
+      .then (processReturnedSongCallbackFn);
+  }
+  function renderToOut7 (song) {
+    out7Element.textContent = String(song.id);
+  }
+
+  async function tryFetch7 () {
+    getSong2(renderToOut7);
+  }
+  tryFetch7();
+
+
+
+
+</script>
+</body>
+</html>

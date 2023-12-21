@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>More Controls</title>
+  <style>
+    label {
+      display: block;
+    }
+
+    span {
+      vertical-align: top;
+    }
+
+    input {
+      width: 14em;
+    }
+    #color-text {
+      margin-bottom: 40px;
+    }
+  </style>
+</head>
+<body>
+<h1>More Controls</h1>
+<form action="http://localhost:5002/submit" method="post">
+  <datalist id="colors">
+    <option>red</option>
+    <option>blue</option>
+  </datalist>
+  <fieldset>
+    <legend>Color Inputs</legend>
+    <label for="color-text">Color(text)</label>
+    <input id="color-text" name="color-text"
+           type="text" placeholder="Type and select your color"
+           list="colors">
+    <label for="color-select">Color(selection)</label>
+    <select id="color-select" name="color-select">
+      <option>red</option>
+      <option>blue</option>
+    </select>
+  </fieldset>
+  <fieldset>
+    <legend>Multiline Input</legend>
+    <label for="areatext">Enter 100 Chars</label>
+    <textarea id="areatext" name="area-text" cols="40" rows="10"
+              oninput="showlength.value=areatext.value.length">
+    </textarea>
+    <progress id="showlength" value="0" max="100"></progress>
+  </fieldset>
+  <button>Send Data</button>
+</form>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Formated First Form</title>
+  <style>
+    label {
+      display: block;
+      margin: 10px 0;
+    }
+    input:required::placeholder {
+      color: red;
+    }
+    input:required {
+      border-left: 7px solid red;
+      border-bottom: 3px solid red;
+    }
+    input:invalid {
+      box-shadow: 0 0 5px 1px red;
+    }
+    form:invalid button {
+      color: #CCCCCC;
+    }
+  </style>
+</head>
+<body>
+<h1>Formated First Form</h1>
+<form action="http://localhost:5002/submit" method="get">
+  <label for="message"><span>Message: </span>
+    <input id="message" name="message"
+           type="text" placeholder="Your Message here" required>
+  </label>
+  <button>Send Data</button>
+</form>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Quiz CSS Selectors 2</title>
+  <style>
+    article > h1 {
+      background-color: orange;
+    }
+
+    p > p {
+      background-color: orange;
+    }
+
+    section section {
+      font-size: 0.5em;
+    }
+  </style>
+</head>
+<body>
+<h1>Quiz CSS</h1>
+<h2>Question 2</h2>
+<article>
+  <header><h1>A Title</h1></header>
+  <section>
+    <p>start of a section
+    <p> a paragraph in paragraph</p>
+    </p>
+  </section>
+  <section>
+    <section>text in section within section</section>
+    <section>
+      <section>text in section within section within section</section>
+    </section>
+  </section>
+</article>
+</body>
+</html>

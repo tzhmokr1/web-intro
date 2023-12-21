@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Demo Fetch POST</title>
+</head>
+<body>
+<h1>Demo Fetch POST</h1>
+<button>Demo Fetch POST</button>
+<script>
+  const SONGS_API_URL = 'http://localhost:3000/songs/';
+
+  async function insertSong(song) {
+    try {
+      const fetchOptions = {
+        "method": "POST",
+        "headers": {
+          "accept": "application/json",
+          "content-type": "application/json"
+        },
+        "body": JSON.stringify(song)
+      }
+      const response = await fetch(SONGS_API_URL, fetchOptions);
+      const insertedSong = await response.json();
+      console.log("inserted");
+      console.log(insertedSong);
+    } catch {
+      console.log('logSongs awaitError');
+    }
+  }
+
+  async function logSongs() {
+    try {
+      const response = await fetch(SONGS_API_URL);
+      const songs = await response.json();
+      for (song of songs) {
+        console.log(song.title)
+      }
+    } catch {
+      console.log('logSongs awaitError');
+    }
+  }
+
+  const newSong = {
+    "title": "My New Song 3",
+    "artist": "TBD",
+    "rating": 0
+  }
+
+  async function demoFetchPOST () {
+    await logSongs();
+    await insertSong(newSong);
+    await logSongs();
+  }
+
+  document.querySelector('button').addEventListener('click', demoFetchPOST);
+
+</script>
+</body>
+</html>

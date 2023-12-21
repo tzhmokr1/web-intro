@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DOM Append Operations</title>
+</head>
+<body>
+<h1>Songs</h1>
+<ul id="songs"></ul>
+
+<script src="songmodel.js"></script>
+<script>
+
+    function renderSongs(songs) {
+        const df = document.createDocumentFragment();
+
+        // TODO HTML Struktur mit createElement() erstellen.
+        for (const song of songs) {
+
+        }
+        document.getElementById("songs").appendChild(df);
+    }
+
+    renderSongs();
+</script>
+</body>
+</html>

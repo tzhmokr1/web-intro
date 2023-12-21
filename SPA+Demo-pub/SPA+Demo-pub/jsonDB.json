@@ -1,0 +1,36 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "MAS SE is great",
+      "author": "luc"
+    },
+    {
+      "title": "WebEngineering is great",
+      "author": "markus",
+      "id": 2
+    },
+    {
+      "title": "Databases are great",
+      "author": "hansjürg",
+      "id": 3
+    },
+    {
+      "title": "HSR is great",
+      "author": "markus",
+      "id": 4
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "yes indeed",
+      "postId": 1
+    },
+    {
+      "body": "absolutely",
+      "postId": 2,
+      "id": 2
+    }
+  ]
+}

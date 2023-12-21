@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AJAX Songs Demo</title>
+    <style>
+        li.song-entry {
+            font-weight: bold;
+            font-size: larger;
+            margin: 5px;
+        }
+
+        span.artist {
+            font-style: italic;
+            white-space: nowrap;
+        }
+    </style>
+</head>
+<body>
+<h1>AJAX Songs Demo</h1>
+<h2>Songs</h2>
+<ul id="songs-list"></ul>
+
+<h2>Add a New Song</h2>
+<form id="new-song-form">
+    <label for="new-artist-input">Artist</label><input id="new-artist-input">
+    <label for="new-song-title-input">Song Title</label><input id="new-song-title-input">
+    <button>Add Song</button>
+</form>
+
+
+<script type="module">
+    import dataService from "./promiseDataService-todo.js";
+
+    // view refs
+    const songsList = document.querySelector('#songs-list');
+    const newArtistNameInput = document.getElementById('new-artist-input');
+    const newSongTitleInput = document.getElementById('new-song-title-input');
+    const newSongForm = document.getElementById('new-song-form');
+
+
+    // view rendering
+    function createSongsHtml(songs) {
+        return songs.map(song =>
+            `<li class="song-entry" id="song-${song.id}">
+                    (${song.rating})
+                        <span class="title">${song.title}</span>
+                        <span class="artist"> (${song.artist})</span>
+            </li>`).join('');
+    }
+
+    function renderSongs(songs) {
+        songsList.innerHTML = createSongsHtml(songs);
+    }
+
+    async function getAndRenderSongs() {
+      songsList.innerHTML = "Loading Songs";
+      const songs = await dataService.getSongs();
+      renderSongs(songs);
+    }
+
+
+    // controller
+    async function addSongHandler(event) {
+      //todo
+      // 1) sicher stellen dass das Formualr nicht abgeschickt wird
+      // 2) dataService.addNewSong aufrufen mit Werten aus dem Formular
+      // 3) FOrmularfelder leeren
+      // 4) Liste neu rendern (vom Server)
+    }
+
+    newSongForm.addEventListener('submit', addSongHandler);
+
+    // init
+    getAndRenderSongs();
+</script>
+</body>
+</html>

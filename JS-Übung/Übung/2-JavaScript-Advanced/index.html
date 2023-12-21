@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="de">
+	<head>
+		<meta charset="utf-8" />
+		<title>HSR - JavaScript: Einführung</title>
+		<link rel="icon" href="../HSR.Template.Exercises/icon-document.png" type="image/png">
+
+		<link rel="stylesheet" type="text/css" href="../HSR.Template.Exercises/documentStyle.css">
+		<script src="../HSR.Template.Exercises/solutions.js"></script>
+		<script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+		<style>
+			.solutionBox { width: 100%; height: 5em; }
+			.marked { background: lightgreen; }
+		</style>
+	</head>
+	<body>
+		<h1>
+			<a class="backlink" href="../index.html">⇦</a>
+			HSR - JavaScript Advanced
+			<button id="showSolutions">Lösungen anzeigen/ausblenden</button>
+		</h1>
+
+		<h2>Scope</h2>
+		<p>Nutzen Sie folgendes File: <a href="files/Scope.js" target="_blank">files/Scope.js</a></p>
+		<ul>
+			<li>Überlegen Sie sich, was auf der Console ausgegeben wird. Überprüfen Sie Ihre Überlegung.</li>
+			<li>Spielen Sie etwas mit den Variablen, um ein Gefühl für den globalen und den funktionalen Scope zu bekommen.</li>
+			<li>Würde dieses Script in einem Browser ausgeführt zum gleichen Resultat
+				führen? Begründen Sie ihre Antwort.</li>
+			<div class="solution">
+				<p>Nein. Grund: nodejs generiert einen Scope pro File und somit verhalten sich die Variablen ausserhalb einer Funktion unterschiedlich.
+				</p>
+			</div>
+		</ul>
+
+		<h2>Scope 1</h2>
+		<p>Nutzen Sie folgendes File: <a href="files/Scope1.js" target="_blank">files/Scope1.js</a></p>
+		<ul>
+			<li>Überlegen Sie sich, was auf der Console ausgegeben wird. Überprüfen Sie Ihre Überlegug.</li>
+		</ul>
+
+		<div class="solution">
+			<p>Index ist global definiert, dies ermöglicht, dass die logOut Funktion den Index-Wert der doLoop() Funktion ändern kann.</p>
+		</div>
+
+		<h2>Scope 2</h2>
+		<p>Nutzen Sie folgendes File: <a href="files/Scope2.js" target="_blank">files/Scope2.js</a></p>
+		<p>Ziel dieses Programms ist es, den Index der übergeben Buchstaben im Alphabet-Array zu finden und diese zurückzugeben.
+		</p>
+		<ul>
+			<li>Finden Sie die Ursache weshalb A funktioniert und B nicht.</li>
+			<ul>
+				<li>Nutzen Sie den Debugger.</li>
+			</ul>
+			<li>Ändern Sie den Code, sodass dieser wie vorgesehen funktioniert.</li>
+		</ul>
+		<div class="solution">
+			<p>Gleiches Problem wie bei Scope1 aber komplexer.</p>
+		</div>
+
+
+
+		<h2>Context</h2>
+		<p>Nutzen Sie folgendes File: <a href="files/Context1.js" target="_blank">files/Context1.js</a></p>
+		<ul>
+			<li>Überlegen Sie sich, was auf der Console ausgegeben wird. Überprüfen Sie Ihre Überlegung.</li>
+		</ul>
+
+
+		<h2>Functions / Overloading</h2>
+		<p>Nutzen Sie folgendes File: <a href="files/Overloading.js" target="_blank">files/Overloading.js</a></p>
+		<ul>
+			<li>Welchen Output würde ein Java Entwickler erwarten?</li>
+			<li>Führen Sie das Programm aus. Begründen Sie die Ausgabe.</li>
+			<li>Korrigieren Sie den JavaScript Code, so dass der vom Java Entwickler erwartete Output ausgegeben wird. Erhalten Sie dabei die vom Java Programmierer gewünschte Funktionalität d.h. Funktionsaufruf mit beiden Funktionssignaturen möglich.</li>
+		</ul>
+		<div class="solution">
+			<p><code>I say  hi hi hi</code></p>
+			<p>JavaScript kann kein Overloading.</p>
+			<p><a href="solutions/Overloading.js">Lösung</a></p>
+		</div>
+
+		<h2>Function 1</h2>
+		<p>Nutzen Sie folgendes File: <a href="files/Function1.js" target="_blank">files/Function1.js</a></p>
+		<ul>
+			<li>Überlegen Sie sich, was auf der Console ausgegeben wird. Überprüfen Sie Ihre Überlegung.</li>
+			<li>Erklären Sie: Weshalb können die beiden Counters unterschiedliche Werte besitzen.</li>
+			<div class="solution">
+				<p>Beim Funktionsaufruf wird der Wert übergeben. Die innere Funktion kann auf diese zugreifen und hält diese auch am 'leben'.</p>
+			</div>
+		</ul>
+		<p>Ändern Sie die counter Funktion soweit ab das ein increment() / decrement() und value() möglich ist.</p>
+<pre class="prettyprint"><code>function counter(start){
+	   //TODO
+}
+
+const c1 = counter(2);
+console.log("3:", c1.incr());
+console.log("4:", c1.incr());
+console.log("5:", c1.incr());
+console.log("5:", c1.count());
+console.log("4:", c1.decr());
+
+const c2 = counter(-10);
+console.log("-9:", c2.incr());
+console.log("-8:", c2.incr());
+console.log("-7:", c2.incr());
+console.log("-7:", c2.count());
+console.log("-8:", c2.decr());</code></pre>
+		<div class="solution">
+			<a href="solutions/Function1.js" target="_blank">Lösung</a>
+		</div>
+
+		<h2>Function 2</h2>
+		<p>Nutzen Sie folgendes File: <a href="files/Function.js" target="_blank">files/Function.js</a></p>
+		<ul>
+			<li>Überlegen Sie sich, was auf der Console ausgegeben wird. Überprüfen Sie Ihre Überlegung.</li>
+			<li>Was ist der Unterschied zwischen folgenden 4 Varianten? Weshalb funktioniert Variante 1 & 2 aber 3 und 4 nicht?</li>
+			<ul>
+				<li>Variante 1:<code>sayHi((x)=>console.log(x));</code></li>
+				<li>Variante 2:<code>sayHi(console.log);</code></li>
+				<li>Variante 3:<code>sayHi(console.fun);;</code></li>
+				<li>Variante 4:<code>sayHi(console.log());</code></li>
+			</ul>
+			<div class="solution">
+				<p>Bei Variante 1 wird eine neue Funktion erzeugt und diese übergeben.</p>
+				<p>Bei Variante 2 wird eine bestehende Funktion (console.log) übergeben. Context geht zwar verloren aber funktioniert trotzdem.</p>
+				<p>Bei Variante 3 wird eine bestehende Funktion (console.fun) übergeben. Context geht verloren somit ist *this* nicht korrekt gesetzt.</p>
+				<p>Bei Variante 4 wird der Rückgabewert von console.log() der sayHi() Funktion als Wert übergeben.</p>
+			</div>
+			<li>Welcher dieser Ausdrücke würde auch funktionieren und weshalb?</li>
+			<ul>
+				<li><code>sayHi((x)=>console.log);</code></li>
+				<li><code>sayHi((x)=>console.log(":-)"));</code></li>
+				<li><code>sayHi((x)=>()=>console.log("hacked!"));</code></li>
+				<li><code>sayHi((x)=>(()=>console.log("hacked!"))());</code></li>
+				<li><code>sayHi((x)=>((y)=>console.log(y))("wtf"));</code></li>
+				<li><code>sayHi(function(x){console.log(x)});</code></li>
+			</ul>
+			<div class="solution">
+				<p>Nein - Console.log wird nicht aufgerufen.</p>
+				<p>Ja - Es wird immer ein Smiley ausgegeben.</p>
+				<p>Nein - die inner Funktion wird nicht aufgerufen.</p>
+				<p>Ja - die inner Funktion wird aufgerufen. Es wird immer "hacked!" ausgegeben.</p>
+				<p>Ja - die inner Funktion wird aufgerufen. Es wird immer "wtf" ausgegeben.</p>
+				<p>Ja - eine ganz normale Funktion wird übergeben.</p>
+			</div>
+		</ul>
+
+
+		<h2>Wecker</h2>
+		<p>Schreiben Sie einen Wecker.</p>
+
+		<ul>
+			<li>Der Wecker soll nach x-Sekunden eine Aktion (function) ausführen.</li>
+			<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/WindowTimers/setTimeout" target="_blank">setTimeout</a> ist notwendig</li>
+		</ul>
+		<p>Beispiel:</p>
+<pre class="prettyprint"><code>function clock(seconds, func){
+	//TODO
+}
+clock(3, () => console.log("Hallo World"));</code></pre>
+
+		<div class="solution">
+			<a href="solutions/Callback.js" target="_blank">Lösung</a>
+		</div>
+
+ 
+		<h2>Style-Guide</h2>
+		<p>Analysieren Sie den <a href="https://github.com/airbnb/javascript">Airbnb Style-Guide</a>.</p>
+		<ul>
+			<li>Finden Sie Punkte aus der Vorlesung wieder?</li>
+			<li>Gibt es Punkte die Sie streichen würden?</li>
+			<li>Würden Sie diesen Style-Guide in einem Projekt einsetzen?</li>
+		</ul>
+		<div class="solution">
+			<p>Keine Lösung: Besprechen Sie Ihre Meinung mit anderen Übungs-Teilnehmenden.</p>
+		</div>
+
+	</body>
+</html>

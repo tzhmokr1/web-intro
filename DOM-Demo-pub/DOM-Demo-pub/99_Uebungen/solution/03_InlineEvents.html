@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Inline Events</title>
+</head>
+
+<body>
+<h1>Songs</h1>
+<ul id="songs"></ul>
+
+<script src="songmodel.js"></script>
+<script>
+    //DOM Refs
+    const songListElement = document.getElementById("songs");
+
+    // Rendering
+    function createSongsHtml(songs) {
+        return songs.map(song =>
+            `<li>
+            <h3>${song.rating}
+                <button onclick="rate('${song.id}', 1)">+</button>
+                <button onclick="rate('${song.id}', -1)">-</button>
+                ${song.title}
+            </h3>
+          <p>${song.artist}</p>
+        </li>`).join('');
+    }
+
+    function renderSongs() {
+        //assigning innerHTML once is fine. Doing it repeatedly is a problem
+        document.getElementById("songs").innerHTML = createSongsHtml(songsSorted());
+    }
+
+    //must be global to be referenced in the inline event handler
+    function rate(id, delta) {
+        rateSong(id, delta);
+        renderSongs();
+    }
+
+    renderSongs();
+</script>
+</body>
+</html>

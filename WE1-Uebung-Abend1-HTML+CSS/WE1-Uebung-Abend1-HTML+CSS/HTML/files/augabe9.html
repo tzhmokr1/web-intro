@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Aufgabe 9</title>
+    <style>
+        body { /* 01 */
+            font-size: 16px;
+        }
+        main { /* 02 */
+            border: solid black 1px;
+            width: 300px;
+        }
+        h1 { /* 03 */
+            font-size: 1.5em;
+        }
+        label { /* 04 */
+            display: block;
+            margin: 10px;
+        }
+        label > span { /* 05 */
+            display: inline-block;
+            width: 100px;
+            text-align: right;
+            border: solid black 1px;
+        }
+        input { /* 06 */
+            width: 130px;
+        }
+        .required span { /* 07 */
+            font-style: italic;
+        }
+        label.required > span::before {
+            /* 08 */
+            content: " * ";
+        }
+        label input { /* 09 */
+            background-color: green;
+        }
+        #first-name { /* 10 */
+            background-color: salmon;
+        }
+        .box { /* 11 */
+            border: solid black 1px;
+            margin: 2px;
+        }
+        section > .box { /* 12 */
+            width: 240px;
+        }
+        .box > .box { /* 13 */
+            font-size: 1.5em;
+        }
+        .box > .box > .box { /* 14 */
+            background-color: salmon;
+        }
+        .box > .box > .box:hover { /* 15 */
+            background-color: green;
+        }
+        </style>
+</head>
+<body>
+<h1>WED1 CSS Aufgabe</h1>
+
+<main class="label">
+
+    <section id="label > span">
+
+        <label class="required">
+            <span>First Name</span>
+            <input id="first-name"/>
+        </label>
+        <label>
+            <span class="first-name">First Name</span>
+            <input id="last-name"/>
+        </label>
+    </section>
+
+    <section id="label">
+        <div class="box">
+            <span id="box">box1</span>
+            <div class="box">
+                <span>box1.1</span>
+                <div class="box">
+                    <span>box1.1.1</span>
+                </div>
+            </div>
+            <div class="box">
+                <span>box1.2</span>
+            </div>
+        </div>
+    </section>
+</main>
+</body>
+</html>

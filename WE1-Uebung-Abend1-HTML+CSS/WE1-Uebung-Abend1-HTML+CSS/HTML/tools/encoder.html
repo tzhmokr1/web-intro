@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="de">
+	<head>
+		<meta charset="utf-8" />
+		<title>HEX to text encoder</title>
+		<style>
+		body { font-family: Arial, Helvetica, sans-serif; }
+		label {
+			display: block;
+		}
+
+		textarea {
+		  width: 100%;
+		  height: 10em;
+		}
+		</style>
+		<script>
+		window.onload = function() {
+			function convert() {
+				var encoding = document.getElementById('encoding').value; // 8, 16, 32, 64
+				var byteLenght = document.getElementById('byteLength').value; // 2, 4, 8, 16
+				var littleEndian = document.getElementById('littleEndian').checked;
+				var hex = document.getElementById('hex').value;
+
+				var hexList = (hex.replace(/(\r\n|\n|\r)/g," ")).split(" ");
+				var list = [];
+
+				for (var i = 0; i < hexList.length; i += byteLenght / 2) {
+				var bytes = hexList.slice(i, i + byteLenght / 2);
+					if (!littleEndian) {
+						bytes.reverse();
+					}
+					var hex = String.fromCharCode(parseInt(bytes.join(''), encoding));
+					list.push(hex);
+				}
+				document.getElementById('output').value = '"'+list.join("")+'"';
+				document.getElementById('length').value = document.getElementById('output').value.length;
+			}
+			document.getElementById('convert').addEventListener('click', convert);
+		}
+		</script>
+	</head>
+	<body>
+		<h1>HEX to text encoder (<a href="https://jsfiddle.net/as2qLym7/1/" target="_blank">source</a>)</h1>
+		<label>Encoding:
+			<select id="encoding">
+				<option value="64">UTF-64</option>
+				<option value="32">UTF-32</option>
+				<option value="16">UTF-16</option>
+				<option value="8">UTF-8</option>
+			</select>
+		</label>
+		<label>Byte length:
+			<select id="byteLength">
+				<option value="16">16</option>
+				<option value="8">8</option>
+				<option value="4">4</option>
+				<option value="2">2</option>
+			</select>
+		</label>
+		<label>Little Endian:
+		  <input type="checkbox" id="littleEndian" checked />
+		</label>
+		<label>Hex
+			<textarea id="hex" data-example="ff fe 57 00 69 00 6c 00 6c 00 6b 00 6f 00 6d 00 6d 00 65 00 6e 00 20 00 7a 00 75 00 20 00 57 00 65 00 62 00 65 00 6e 00 67 00 69 00 6e 00 65 00 65 00 72 00 69 00 6e 00 67 00 20 00 26 00 20 00 44 00 65 00 73 00 69 00 67 00 6e 00 20 00 31 00 2e 00 0d 00 0a 00"></textarea>
+		</label>
+
+		<button id="convert">
+			Convert
+		</button>
+		<label>String:
+			<output id="output" />
+		</label>
+		<label>Length:
+			<output id="length" />
+		</label>
+	</body>
+</html>

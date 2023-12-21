@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AJAX Counter</title>
+</head>
+<body>
+<h1>Ajax Counter</h1>
+<p>counter-server.js must be running</p>
+<div>
+  <label for="count">Current Count:</label>
+  <output id="count"></output>
+</div>
+<button id="nextBtn">Get Next Count</button>
+<script>
+  function initApp() {
+    // constants
+    const COUNTER_API_URL = 'http://localhost:8080/api/nextCounter';
+
+    // app model (synchronized by controllers)
+    let localCounter = 0;
+
+    // view references
+    const counterOutputElement = document.getElementById('count');
+    const nextBtnElement = document.getElementById('nextBtn');
+
+
+    // view update / render
+    function updateView() {
+      counterOutputElement.value = localCounter;
+    }
+
+    // controller, helper & listener registration
+    const fetchCounterAndDisplay = function() {
+      fetch(COUNTER_API_URL)
+        .then(response => response.json())
+        .then((nextCounterObject) => {
+          localCounter = nextCounterObject.counter;
+          updateView();
+      });
+    };
+
+    nextBtnElement.addEventListener('click', fetchCounterAndDisplay);
+
+    // init view
+    fetchCounterAndDisplay();
+
+  }
+
+  window.onload = initApp;
+
+</script>
+
+</body>
+</html>

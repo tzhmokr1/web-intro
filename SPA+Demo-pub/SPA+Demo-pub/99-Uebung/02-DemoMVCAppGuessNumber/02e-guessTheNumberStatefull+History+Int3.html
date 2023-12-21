@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Guess the Number</title>
+  <script src="02e-guessTheNumberScript.js"></script>
+
+  <script type="text/plain" id="TEXT_TOO_HIGH">TooHigh</script>
+  <script type="text/plain" id="TEXT_TOO_LOW">TooLow</script>
+  <script type="text/plain" id="TEXT_YOU_GUESSED_TOO_HIGH">You guessed too high</script>
+  <script type="text/plain" id="TEXT_YOU_GUESSED_TOO_LOW">You guessed too low</script>
+</head>
+<body>
+<h1>Guess the Number</h1>
+<div id="introDiv">
+  <h2>How about Guessing a number bewtween 1 and 100? Do You Want to Play a Game? </h2>
+  <button id="startBtn">Start Game</button>
+</div>
+<div id="guessingHistoryDiv" hidden>
+  <label for="guessHistoryOutput">Your guesses:</label>
+  <output id="guessHistoryOutput"></output>
+</div>
+<div id="guessingDiv" hidden>
+  <p>This is round number
+    <output id="roundOut"></output>
+  </p>
+  <label for="guessInput">What is Your Guess?</label>
+  <input id="guessInput">
+  <button id="checkBtn">Check Guess</button>
+</div>
+<div id="evalGuessDiv" hidden>
+  <p>You guessed
+    <output id="guessOut"></output>
+  </p>
+  <output id="guessEvalOut"></output>
+  <button id="guessAgainBtn">Want to Guess Again?</button>
+</div>
+<div id="endDiv" hidden>
+  <p>Great, you took
+    <output id="resultRoundsOut"></output>
+    Rounds to Guess the Hidden Number
+    <output id="guessedNumberOut"></output>
+  </p>
+  <p>Do You Want to Play Again?</p>
+  <button id="reStartBtn">Start Another Game</button>
+</div>
+</body>
+</html>

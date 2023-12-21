@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Demo Fetch</title>
+</head>
+<body>
+<h1>Demo Fetch</h1>
+<script>
+  const SONGS_API_URL = 'http://localhost:3000/songs/';
+  const songId = "02";
+  fetch(SONGS_API_URL + songId)
+    .then((response) => {
+      console.log('response', response)
+      return response.json();
+    })
+    .then((data) => {
+      console.log('thenData', data);
+    });
+
+  async function test() {
+    const response = await fetch(SONGS_API_URL + songId);
+    const data = await response.json();
+    console.log('awaitData', data);
+  }
+
+  test();
+</script>
+</body>
+</html>

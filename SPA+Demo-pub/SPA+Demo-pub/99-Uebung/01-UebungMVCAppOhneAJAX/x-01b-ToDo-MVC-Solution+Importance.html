@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ToDo Liste mit MVC</title>
+  <style>
+    li.selected {
+      border: solid red 2px;
+    }
+
+    ol {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    li {
+      display: block;
+      padding: 3px;
+      width: 300px;
+    }
+  </style>
+</head>
+<body>
+
+<h1>ToDo Liste mit MVC + Importance</h1>
+<label for="toDoTxt">Neues ToDo:</label>
+<input id="toDoTxt">
+<button id="addBtn" disabled>Hinzufügen</button>
+<h2>ToDo Liste</h2>
+<ol id="toDoListElm">
+</ol>
+<button id="remBtn" disabled>Löschen</button>
+<button id="incImpBtn" disabled>Wichtiger</button>
+<button id="decImpBtn" disabled>Weniger wichtig</button>
+
+<script>
+
+  class ToDo {
+    constructor(toDoText, importance = 0) {
+      this.toDoText = toDoText;
+      this.importance = importance;
+    }
+  }
+
+  // Model / State
+  let toDoList = [];
+  let newToDoTextEmpty = true;
+  let selectedToDo = null;
+
+  function modifySelectedToDoImportance(incValue = 1) {
+    selectedToDo.importance += incValue;
+    toDoList.sort(function(toDo1, toDo2) {return toDo2.importance - toDo1.importance;});
+    udateUI();
+  }
+
+  // ViewReferecens
+  const toDoTxt = document.querySelector('#toDoTxt');
+  const addBtn = document.querySelector('#addBtn');
+  const toDoListElm = document.querySelector('#toDoListElm');
+  const remBtn = document.querySelector('#remBtn');
+  const incImpBtn = document.querySelector('#incImpBtn');
+  const decImpBtn = document.querySelector('#decImpBtn');
+
+  // Model <-> View Refs Conversion
+  function getToDoElement (toDo) {
+    const toDoIndex = toDoList.findIndex(function(toDoFromList) {return toDoFromList === toDo;});
+    return document.querySelector(`[data-index="${toDoIndex}"`);
+  }
+  function getToDo (toDoElement) {
+    const toDoIndex = parseInt(toDoElement.dataset.index);
+    return toDoList[toDoIndex];
+  }
+
+  // UI Functions
+  function toDoElementHTMLString(toDo, index) {
+    return `<li data-index="${index}">(${toDo.importance}) ${toDo.toDoText}</li>`;
+  }
+
+  function toDoListContentHTMLString(toDoList) {
+    if (toDoList.length === 0) {
+      return '<h3>Deine ToDo Liste ist leer. Erfasse das erste ToDo</h3>';
+    }
+    let listContentHTMLString = '';
+    for (var i = 0; i < toDoList.length; i++) {
+      listContentHTMLString += toDoElementHTMLString(toDoList[i], i);
+    }
+    return listContentHTMLString;
+  }
+
+
+  function updateUiSelectedToDoButtons() {
+    const disabledState = !Boolean(selectedToDo);
+    remBtn.disabled = disabledState;
+    incImpBtn.disabled = disabledState;
+    decImpBtn.disabled = disabledState;
+  }
+
+
+  function udateUI() {
+    toDoListElm.innerHTML = toDoListContentHTMLString(toDoList);
+    addBtn.disabled = newToDoTextEmpty;
+    updateUiSelectedToDoButtons();
+    if (selectedToDo) {
+      getToDoElement(selectedToDo).classList.add('selected');
+    }
+  }
+
+  function updateUISelection(newToSelectToDo) {
+    if (selectedToDo) {
+      getToDoElement(selectedToDo).classList.remove('selected');
+    }
+    if (newToSelectToDo === null || newToSelectToDo === selectedToDo) {
+      selectedToDo = null;
+    } else {
+      selectedToDo = newToSelectToDo;
+      getToDoElement(selectedToDo).classList.add('selected');
+    }
+    updateUiSelectedToDoButtons();
+  }
+
+
+
+  toDoTxt.addEventListener('input', function() {
+    newToDoTextEmpty = !Boolean(toDoTxt.value);
+    addBtn.disabled = newToDoTextEmpty;
+  });
+
+
+
+  addBtn.addEventListener('click', function() {
+    toDoList.push(new ToDo(toDoTxt.value));
+    toDoTxt.value = '';
+    newToDoTextEmpty = true;
+    udateUI();
+  });
+
+
+  toDoListElm.addEventListener('click', function(e) {
+    if (e.target.tagName === 'LI') {
+      const clickedToDo = getToDo(e.target);
+      updateUISelection(clickedToDo);
+    }
+  });
+
+  remBtn.addEventListener('click', function() {
+    let newToDoList = [];
+    for (var i = 0; i < toDoList.length; i++) {
+      if (toDoList[i] !== selectedToDo) {
+        newToDoList.push(toDoList[i]);
+      }
+    }
+    toDoList = newToDoList;
+    // kürzer: toDoList.splice(removeIndex, 1);
+    selectedToDo = null;
+    udateUI();
+  });
+
+
+  incImpBtn.addEventListener('click', function() {
+    modifySelectedToDoImportance(1);
+  });
+
+  decImpBtn.addEventListener('click', function() {
+    modifySelectedToDoImportance(-1);
+  });
+
+  udateUI();
+
+</script>
+</body>
+</html>

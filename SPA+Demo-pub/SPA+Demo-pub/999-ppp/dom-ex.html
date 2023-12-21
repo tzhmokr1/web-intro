@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>dom-ex</title>
+</head>
+<body>
+<h1>domEx</h1>
+<button>clickMe</button>
+<script>
+  document.querySelector('button').addEventListener('click', () => console.log('button-1'))
+  document.querySelector('button').addEventListener('click', console.log('button-2'))
+  document.body.addEventListener('click', () => console.log('body'))
+  document.querySelector('h1').addEventListener('click', () => console.log('h1'));
+  document.querySelector('button').addEventListener('click', () => console.log('button-2'));
+</script>
+</body>
+</html>

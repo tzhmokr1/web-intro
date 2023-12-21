@@ -1,0 +1,32 @@
+<html>
+<head><title>CSS-Beispiel: Attributselektor</title>
+  <style>
+    a[href^="http://"] {
+      font-weight: bold
+    }
+
+    a[href$=".pdf"] {
+      color: green
+    }
+
+    a[href*="wiki"] {
+      font-style: italic
+    }    </style>
+</head>
+<body>
+<h1>Teilübereinstimmungen</h1>
+<ul>
+  <li>
+    <a href="http://example.com/">Beispiellink</a>
+  </li>
+  <li>
+    <a href="https://example.com/example.pdf">Ein PDF-Dokument</a>
+  </li>
+  <li><a href="http://wiki.selfhtml.org/">
+    Das selfhtml wiki</a></li>
+  <li>
+    <a href="https://example.org/WIKI/example.pdf/">
+      Ein PDF-Dokument</a></li>
+</ul>
+</body>
+</html>

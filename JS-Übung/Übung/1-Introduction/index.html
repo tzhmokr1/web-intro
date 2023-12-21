@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="de">
+	<head>
+		<meta charset="utf-8" />
+		<title>HSR - JavaScript: Einführung</title>
+		<link rel="icon" href="../HSR.Template.Exercises/icon-document.png" type="image/png">
+
+		<link rel="stylesheet" type="text/css" href="../HSR.Template.Exercises/documentStyle.css">
+		<script src="../HSR.Template.Exercises/solutions.js"></script>
+		<script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+		<style>
+			.solutionBox { width: 100%; height: 5em; }
+			.marked { background: lightgreen; }
+		</style>
+	</head>
+	<body>
+		<h1>
+			<a class="backlink" href="../index.html">⇦</a>
+			HSR - JavaScript Einführung
+			<button id="showSolutions">Lösungen anzeigen/ausblenden</button>
+		</h1>
+
+
+		<h2>Installation</h2>
+		<p>Installieren Sie <a href="https://nodejs.org/en/" target="_blank">Node.js</a></p>
+
+		<h2>Node.js Console</h2>
+		<p>Starten Sie Node.Js über die Console.</p>
+		<p>Machen Sie sich mit der Console vertraut:</p>
+		<ul>
+			<li>Überprüfen Sie ob die Ausgaben von der Folie <code>The Abstract Equality Comparison Algorithm</code> stimmen.</li>
+			<li>Gehen Sie durch die Codebeispiele von <strong>Numbers und '+ - * /'</strong>. Versuchen Sie die jeweiligen Outputs mit eigenen Worten zu begründen.</li>
+			<li>Definieren Sie eine Funktion <code>add(a, b){ ... }</code> und rufen Sie diese auf.</li>
+		</ul>
+
+		<h2>JavaScript Expression</h2>
+		<p>Geben Sie für die folgenden JavaScript Expression jeweils an was das in der Konsole angezeigt wird. Nehmen Sie an, dass die Expressions in der gleichen Umgebung nacheinander ausgeführt werden.</p>
+		<ol>
+			<li><pre class="prettyprint"><code class="language-javascript">console.log({a:[3,2,1], b:3}['b']);</code></pre></li>
+			<li><pre class="prettyprint"><code class="language-javascript">console.log({a:[3,2,1], b:3}.a);</code></pre></li>
+			<li><pre class="prettyprint"><code class="language-javascript">console.log(typeof({a:[3,2,1], b:3}.a[9/3]));</code></pre></li>
+			<li><pre class="prettyprint"><code class="language-javascript">let a = [0.1,0.2,0.3]; console.log(typeof(a));</code></pre></li>
+			<li><pre class="prettyprint"><code class="language-javascript">console.log(a[0]+a[1]-a[2]==0);</code></pre></li>
+		</ol>
+		<div class="solution">
+			<p>Nutzen Sie die Console!</p>
+		</div>
+
+
+		<h2>JavaScript Fallgruben</h2>
+		<p>Im <a href="files/fallgrube.js">Fallgrube.js</a> haben sich einige Fehler eingeschlichen.</p>
+		<p>Korrigieren Sie die Funktionen damit der Output stimmt.</p>
+		<p>Nutzen Sie diese Aufgabe um den Debugger auszuprobieren.</p>
+
+		<div class="solution">
+			<pre class="prettyprint"><code class="language-javascript"><!--
+-->//here the for(;;)-loop is used, could also use for-of
+function sumAllPrices() {
+	let allPrices = 0;
+	for (let i = 0; i < sampleData.length; ++i) {
+		allPrices += sampleData[i].price;
+	}
+	return allPrices;
+}
+
+function sortByQuantity() {
+	const quantities =  [ ];
+	for (let i = 0; i < sampleData.length; ++i) {
+		quantities[quantities.length] = sampleData[i].quantity;
+	}
+	quantities.sort(function(a, b){ return (a - b); });
+	return quantities;
+}
+
+function getUnavailableBookTitles() {
+	const titles = [ ];
+	for (let i = 0; i < sampleData.length; ++i) {
+		if (sampleData[i].quantity === 0) {
+			titles[titles.length] = sampleData[i].title;
+		}
+	}
+	return titles;
+}
+
+function getOnlyProvidedData() {
+	const data = [ ];
+	for (let i = 0; i < sampleData.length; ++i) {
+		if (sampleData[i].data !== undefined) {
+			data[data.length] = sampleData[i].data;
+		}
+	}
+	return data;
+}<!--
+		--></code></pre>
+		</div>
+
+
+		<h2>JavaScript Typen</h2>
+		<p>Schauen sie sich das folgende Programm an. Geben sie an, was die console.log-Statements jeweils ausgeben und weshalb.
+			Lösen Sie zuerst die Aufgabe auf dem Papier, bevor sie das Programm von Node.js ausführen lassen.</p>
+		<pre class="prettyprint"><code class="language-javascript"><!--
+-->function main() {
+    console.log("a1)", a, typeof a); // value:         type:               reason:
+    var a = 5.5;
+    console.log("a2)", a, typeof a); // value:         type:               reason:
+
+    const b = parseInt(a);
+    console.log("b)", b, typeof b); // value:         type:               reason:
+
+    const c = b + "5";
+    console.log("c)", c, typeof c); // value:         type:               reason:
+
+    const d = "5" + b;
+    console.log("d)", d, typeof d); // value:         type:               reason:
+
+    const e = b + b + "auto";
+    console.log("e)", e, typeof e); // value:         type:               reason:
+
+    const f = b - "3";
+    console.log("f)", f, typeof f); // value:         type:               reason:
+
+    const g = b - "a";
+    console.log("g)", g, typeof g); // value:         type:               reason:
+
+    const h = "abc" < "def";
+    console.log("h)", h, typeof h); // value:         type:               reason:
+
+    const i = [];
+    console.log("i)", i, typeof i); // value:         type:               reason:
+
+    const j = {};
+    console.log("j1)", j, typeof j); // value:         type:               reason:
+
+    console.log("j2)", i == "");    // value:                              reason:
+
+    console.log("j3)", j == "");    // value:                              reason:
+
+    const k = function() { return "a"; }
+    console.log("k)", k, typeof k); // value:         type:               reason:
+
+    const l = main;
+    console.log("l)", l, typeof l); // value:         type:               reason:
+
+    const m = NaN;
+    console.log("m)", m, typeof m); // value:         type:               reason:
+
+    const n = null;
+    console.log("n)", n, typeof n); // value:         type:               reason:
+
+    const o = /hsr/i;
+    console.log("o)", o, typeof o); // value:         type:               reason:
+
+    console.log("p)", typeof undefined);     // value:                    reason:
+
+    console.log("q)", null === undefined);   // value:                    reason:
+}
+main();<!--
+			--></code></pre>
+		<div class="solution">
+			<pre class="prettyprint"><code class="language-javascript"><!--
+-->
+
+a1) undefined 'undefined'
+a ist undefined da die var Definition an den Anfang der Funktion angehoben wird 
+("hoisting", "function scope"), aber die Wertzuweisung nicht angehoben wird
+
+a2) 5.5 'number'
+
+b) 5 'number'
+JavaScript kennt nur Float (number), kein Integer
+
+c) 55 string
+Ist einer der beiden Operanden ein String, so werden die Andern in einen String gecastet
+
+d) 55 string
+Siehe oben
+
+e) 10auto string
+- Expressions werden von links nach rechts aufgelöst.
+- Jede Berechnung (Operand, Operator, Operand) wird einzeln durchgeführt.
+- Falls notwendig werden Operanden gecastet.
+Die ersten beiden Operanden sind Zahlen und deshalb addierbar.
+Das Resultat der Addition wird in einen String gecastet,
+damit es mit dem String verrechnet werden kann.
+
+f) 2 'number'
+String kennt keinen (-)-Operator. Deshalb wird versucht, den String in eine Zahl zu casten.
+
+g) NaN 'number'
+String kennt keinen (-)-Operator. Deshalb wird versucht,
+den String in eine Zahl zu casten, was in diesem Fall scheitert.
+
+h) true 'boolean'
+Der ASCII-Wert wird verglichen. Buchstabe für Buchstabe: "aa" < "ab" -> true
+
+i) [] 'object'
+Auch Arrays sind Objekte
+
+j1) {} 'object'
+Leeres Objekt
+
+j2) true
+Leeres Array wird mit toPrimitive zu "". Vergleich mit "" gibt true
+
+j3) false
+Leeres Objekt wird mit toPrimitive zu "[object Object]" Vergleich mit "" gibt false
+
+k) [Function: k] 'function'
+Die anonyme Funktion hat durch Zuweisung zur Variable k zum Zeitpunkt der Definition den Namen k erhalten 
+
+l) [Function: main] 'function'
+Referenz auf Funktion 'main'
+
+m) NaN 'number'
+NaN ist vom Typ 'number', auch wenn der 'Wert' keine eigentliche Zahl ist.
+
+n) null 'object'
+Auch null ist ein Object
+
+o) /hsr/i 'object'
+Regular Expressions sind auch Objekte
+
+p) undefined
+undefined ist eine unbekannte Variable
+
+q) false
+per definition (abstract equality alg.)</code></pre>
+		</div>
+
+		<h2>JavaScript üben</h2>
+		<p>Folgend sind ein einige Aufgabenstellungen definiert. Versuchen Sie diese zu lösen um ein Gefühl für JavaScript zu erhalten</p>
+		<p>Schreiben Sie für folgene Probleme eine Funktion und einige sinnvolle console.log(...)-Tests</p>
+		<ul>
+			<li><strong>isArray(value)</strong> Soll überprüfen ob ein Parameter ein Array ist.</li>
+			<li><strong>isPalindrome(value)</strong> Soll überprüfen ob der Parameter ein Palindrom ist.</li>
+			<ul>
+				<li>Version 1: mit for-schleife</li>
+				<li>Version 2: ohne for-schleife</li>
+			</ul>
+			<li><strong>showData(obj)</strong> Soll alle <code>key = value</code> eines Objektes ausgeben.</li>
+			<li>Stellen Sie sich eigene Aufgaben :-)</li>
+		</ul>
+
+		<div class="solution">
+			<p>Eine mögliche <a href="solution/showData.js" target="_blank">Lösung</a></p>
+		</div>
+
+	</body>
+</html>

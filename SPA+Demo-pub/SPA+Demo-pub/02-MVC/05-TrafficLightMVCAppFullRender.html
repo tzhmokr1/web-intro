@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title id="appTitle1"></title>
+  <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚦</text></svg>">
+  <style>
+    .light {
+      width: 100px;
+      height: 100px;
+      border: solid black 2px;
+      text-align: center;
+    }
+
+    .light h3 {
+      line-height: 100px;
+      margin: 0;
+    }
+
+    #switch {
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+<div id="app">
+
+</div>
+<script>
+  function initApp() {
+    'use strict';
+
+    // config / constants
+    const LIGHTS_COUNT = 3;
+    const LABELS = {
+      appTitle: 'Traffic Light Web App',
+      switch: 'Switch to Next',
+      lights: ['Stop', 'Attention', 'Go']
+    };
+    const ON_COLORS = ['red', 'orange', 'darkseagreen'];
+    const OFF_COLORS = ['#910000', '#802001', '#005504'];
+
+    // model / app-state + "business logic"
+    let lightState = 0;
+
+    function goToNextLightState() {
+      lightState = (lightState + 1) % LIGHTS_COUNT;
+    }
+
+
+    // view references
+    const appElement = document.getElementById('app');
+
+    // view rendering / update
+
+    function initView() {
+      document.getElementById('appTitle1').innerText = LABELS.appTitle;
+    }
+
+    function getLightColor(lightIndex) {
+      return (lightIndex === lightState) ? ON_COLORS[lightIndex] : OFF_COLORS[lightIndex];
+    }
+
+    function getLightsHTML() {
+      return LABELS.lights.map((lightLabel, lightIndex) =>
+        `<div class="light"
+              style="background-color: ${getLightColor(lightIndex)}">
+           <h3>${lightLabel}</h3>
+         </div>`).join('');
+    }
+
+    function getAppHTML() {
+      return `<h1>${LABELS.appTitle}</h1>
+              <button autofocus>${LABELS.switch}</button>
+              ${getLightsHTML()}`
+    }
+
+    function renderView() {
+      appElement.innerHTML = getAppHTML();
+    }
+
+    // controller
+    function switchLights(event) {
+      if(event.target.matches('button')){
+        goToNextLightState();
+        renderView();
+      }
+    }
+
+    //attach eventListeners
+    appElement.addEventListener('click', switchLights);
+
+    // init view / display initial state
+    initView();
+    renderView();
+  }
+
+  document.addEventListener('DOMContentLoaded', initApp);
+</script>
+</body>
+</html>

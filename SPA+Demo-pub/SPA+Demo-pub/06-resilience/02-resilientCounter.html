@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AJAX Counter (Dealing with Unreliable Data-Service)</title>
+</head>
+<body>
+<h1>Ajax Counter</h1>
+<h2>(Dealing with Unreliable Data-Service)</h2>
+<div>
+  <label for="count">Current Count:</label>
+  <output id="count"></output>
+</div>
+<button id="nextBtn">Get Next Count</button>
+<script>
+  // data service
+  (function() {
+    // revealing module pattern
+
+    // constants
+    const COUNTER_API_URL = 'http://localhost:8080/api/unreliableNextCounter';
+    const SYNCH_ERROR_DEFAULT_TEXT = 'synch error';
+    const DEFAULT_REFETCH_TRIES = 0; // Demo: set to 1 -> less visible problems; set to 2 -> no visible problems
+    const FETCH_ABORT_AFTER_MSEC = 5000;
+
+    // data API
+    const fetchNextCounter = function(processNextCounterCallbackFn, synchErrorText = SYNCH_ERROR_DEFAULT_TEXT) {
+      resilientGetJSON(COUNTER_API_URL, (responseCounterObject) => {
+        responseCounterObject = (responseCounterObject && responseCounterObject.counter)
+            ? responseCounterObject
+            : {counter: synchErrorText};
+        processNextCounterCallbackFn(responseCounterObject);
+      });
+    };
+
+    // general helper
+    const resilientGetJSON = function(url, processJSON, refetchTries = DEFAULT_REFETCH_TRIES) {
+
+      const controller = new AbortController();
+      setTimeout(() => controller.abort(), FETCH_ABORT_AFTER_MSEC);
+
+      const fetchInitOptions = {signal: controller.signal};
+      fetch(url, fetchInitOptions).then(response => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          return Promise.reject();
+        }
+      }).then(processJSON).catch(() => {
+        console.log('refetching');
+        if (refetchTries > 0) {
+          resilientGetJSON(url, processJSON, refetchTries - 1);
+        } else {
+          processJSON({}); //fail
+        }
+      });
+    };
+
+    window.dataService = {fetchNextCounter};
+  })
+  ();
+</script>
+<script>
+  // model definition (including "business logic") used in server and client
+  class Counter {
+    constructor(startValue, incrementValue = 1) {
+      this.counter = startValue;
+      this.incrementValue = incrementValue;
+    }
+
+    increment(specialIncrementValue) {
+      let incrementValue = specialIncrementValue || this.incrementValue;
+      this.counter += incrementValue;
+      return this.counter;
+    }
+  }
+</script>
+
+<script>
+  function initApp() {
+    //constants
+    const SUSPENSE_TEXT = 'update running ';
+
+    // app model (part of app, proxy/copy of Model on server)
+    let localCounter = new Counter(0);
+
+    // view / component model
+    let suspense = false;  //  request is active
+
+    // view references
+    const counterOutputElement = document.getElementById('count');
+    const nextBtnElement = document.getElementById('nextBtn');
+
+    let waitString = '';
+
+    const updateView = function() {
+      if (suspense) {
+        nextBtnElement.disabled = true;
+        waitString += '.';
+        counterOutputElement.value = SUSPENSE_TEXT + waitString;
+        setTimeout(updateView, 200);
+      } else {
+        nextBtnElement.disabled = false;
+        counterOutputElement.value = localCounter.counter;
+      }
+    };
+
+    // controller & helper
+    const renderNextCounter = function(serverCounterObject) {
+
+      localCounter.counter = serverCounterObject.counter;
+      suspense = false;
+      updateView();
+    };
+
+    function fetchAndRenderNextCounter() {
+      console.log('fetchAndRenderNextCounter');
+      suspense = true;
+      waitString = '';
+      updateView();
+      dataService.fetchNextCounter(renderNextCounter);
+    }
+
+    nextBtnElement.addEventListener('click', fetchAndRenderNextCounter);
+
+    // init view
+    fetchAndRenderNextCounter();
+
+  }
+
+  window.onload = initApp;
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Demo JSON Server SPA</title>
+  <style>
+    #new-post-form {
+      display: flex;
+      flex-direction: column;
+      width: 200px;
+    }
+
+    #new-post-form > input {
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+<h1>Demo JSON Server SPA</h1>
+<h2>Posts</h2>
+<ul id="posts-list"></ul>
+<h2>Submit you own Post</h2>
+<form id="new-post-form">
+  <label for="name-input">Your Name</label><input id="name-input">
+  <label for="post-title-input">Your Post</label><input id="post-title-input">
+  <button>Submit Post</button>
+</form>
+<form id="new-comment-form" hidden>
+  <h2>New Comment for Post <span id="new-comment-post-id-span"></span></h2>
+  <label for="comment-body-input">Your Comment</label><input id="comment-body-input">
+  <button>Add Comment</button>
+</form>
+<script type="module">
+  import dataService from "./x-01-dataService-SOLUTION.js";
+
+  function initApp() {
+
+    // DOM Refs
+    const postsList = document.getElementById('posts-list');
+    const nameInput = document.getElementById('name-input');
+    const postTitleInput = document.getElementById('post-title-input');
+    const newPostForm = document.getElementById('new-post-form');
+
+    const newCommentPostIdSpan = document.getElementById('new-comment-post-id-span');
+    const commentBodyInput = document.getElementById('comment-body-input');
+    const newCommentForm = document.getElementById('new-comment-form');
+
+    // View Rendering
+    function createPostCommentsHtml(comments, postId) {
+      const postComments = comments.
+          filter(comment => comment.postId === postId).
+          map((comment) =>
+              `<li>${comment.body}
+                  <button data-action="delete-comment" data-comment-id="${comment.id}">Delete Comment</button>
+               </li>`).join('');
+      return (postComments) ? `<ul>${postComments}</ul>` : '';
+    }
+
+    async function renderPosts() {
+      const posts = await dataService.getPosts();
+      const comments = await dataService.getComments();
+      const postsHtml = posts.
+          filter(post => post.title).
+          map((post) =>
+              `<li>(${post.id}) <em>${post.title}</em> (${post.author})
+                  <button data-action="add-comment" data-post-id="${post.id}">Add Comment</button>
+                  ${createPostCommentsHtml(comments, post.id)}
+              </li>`).join('');
+      postsList.innerHTML = postsHtml;
+    }
+
+    // controller
+    async function submitPostHandler(event) {
+      event.preventDefault();
+      await dataService.submitPost({title: postTitleInput.value, author: nameInput.value});
+      renderPosts();
+    }
+
+    newPostForm.addEventListener('submit', submitPostHandler);
+
+    function handlePostsListItemActions(event) {
+      if (event.target.nodeName === 'BUTTON') {
+        if (event.target.dataset.action === 'add-comment') {
+          const postId = event.target.dataset.postId;
+          newCommentForm.hidden = false;
+          newCommentPostIdSpan.textContent = postId;
+          commentBodyInput.value = '';
+        }
+        if (event.target.dataset.action === 'delete-comment') {
+          const commentId = event.target.dataset.commentId;
+          dataService.deleteComment(commentId);
+          renderPosts();
+        }
+      }
+    }
+
+    postsList.addEventListener('click', handlePostsListItemActions);
+
+    async function submitCommentHandler(event) {
+      event.preventDefault();
+      console.log('click');
+      await dataService.submitComment({body: commentBodyInput.value, postId: Number(newCommentPostIdSpan.innerText)});
+      newCommentForm.hidden = true;
+      renderPosts();
+    }
+
+    newCommentForm.addEventListener('submit', submitCommentHandler);
+
+    renderPosts();
+  }
+
+  window.onload = initApp;
+
+</script>
+</body>
+</html>
